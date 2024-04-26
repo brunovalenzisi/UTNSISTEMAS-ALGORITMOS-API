@@ -7,21 +7,25 @@
 using namespace std;
 
 int length(string s)
-{int i=0;
-int n=0;
-   while(s[i]!='\0'){
+{
+   int i = 0;
+   int n = 0;
+   while (s[i] != '\0')
+   {
       i++;
       n++;
    }
    return n;
 }
 
-int charCount(string s,char c)
+int charCount(string s, char c)
 {
-   int i=0;
-   int n=0;
-   while(s[i]!='\0'){
-      if(s[i]==c){
+   int i = 0;
+   int n = 0;
+   while (s[i] != '\0')
+   {
+      if (s[i] == c)
+      {
          n++;
       }
       i++;
@@ -29,69 +33,48 @@ int charCount(string s,char c)
    return n;
 }
 
-string substring(string s,int d,int h)
-{ 
-   int i=d;
-   string salida="";
-   if(d>h || h>length(s) || d<0){return "";}
-
-while(s[i]!='\0' && i<h){
-salida+=s[i];
-i++;
-}
-   return salida;
-}
-
-string substring(string s,int d) // ok
+string substring(string s, int d, int h)
 {
-   string salida="";
-   int i=d;
-   if(d>length(s)){return "";}
-   while(s[i]!='\0' && i<=length(s)){
-      salida+=s[i];
+   int i = d;
+   string salida = "";
+   if (d > h || h > length(s) || d < 0)
+   {
+      return "";
+   }
+
+   while (s[i] != '\0' && i < h)
+   {
+      salida += s[i];
       i++;
    }
    return salida;
 }
 
-int indexOf(string s,char c) // ok
-{int i=0;
-int j=-1;
-while(s[i]!='\0'){
-if(s[i]==c){
-j=i;
-break;
-}
-i++;
-
-}
-   return j;
-}
-
-int indexOf(string s,char c,int offSet) // ok
+string substring(string s, int d) // ok
 {
-   {int i=0;
-int j=-1;
-while(s[i]!='\0'){
-if(s[i]==c && i>=offSet){
-j=i;
-break;
+   string salida = "";
+   int i = d;
+   if (d > length(s))
+   {
+      return "";
+   }
+   while (s[i] != '\0' && i <= length(s))
+   {
+      salida += s[i];
+      i++;
+   }
+   return salida;
 }
-i++;
 
-}
-   return j;
-}
-}
-
-int indexOf(string s,string toSearch) // ok
-{int i=0;
-int j=-1;
-if(toSearch==""){return -1;}
-   while(s[i]!='\0'){
-      string sub=substring(s,i,i+length(toSearch));
-      if(toSearch==sub){
-         j=i;
+int indexOf(string s, char c) // ok
+{
+   int i = 0;
+   int j = -1;
+   while (s[i] != '\0')
+   {
+      if (s[i] == c)
+      {
+         j = i;
          break;
       }
       i++;
@@ -99,14 +82,38 @@ if(toSearch==""){return -1;}
    return j;
 }
 
-int indexOf(string s,string toSearch,int offset) // ok
-{int i=0;
-int j=-1;
-if(toSearch==""){return -1;}
-   while(s[i]!='\0'){
-      string sub=substring(s,i,i+length(toSearch));
-      if(toSearch==sub && i>=offset){
-         j=i;
+int indexOf(string s, char c, int offSet) // ok
+{
+   {
+      int i = 0;
+      int j = -1;
+      while (s[i] != '\0')
+      {
+         if (s[i] == c && i >= offSet)
+         {
+            j = i;
+            break;
+         }
+         i++;
+      }
+      return j;
+   }
+}
+
+int indexOf(string s, string toSearch) // ok
+{
+   int i = 0;
+   int j = -1;
+   if (toSearch == "")
+   {
+      return -1;
+   }
+   while (s[i] != '\0')
+   {
+      string sub = substring(s, i, i + length(toSearch));
+      if (toSearch == sub)
+      {
+         j = i;
          break;
       }
       i++;
@@ -114,34 +121,126 @@ if(toSearch==""){return -1;}
    return j;
 }
 
-int lastIndexOf(string s,char c)
+int indexOf(string s, string toSearch, int offset) // ok
 {
-   return 0;
+   int i = 0;
+   int j = -1;
+   if (toSearch == "")
+   {
+      return -1;
+   }
+   while (s[i] != '\0')
+   {
+      string sub = substring(s, i, i + length(toSearch));
+      if (toSearch == sub && i >= offset)
+      {
+         j = i;
+         break;
+      }
+      i++;
+   }
+   return j;
 }
 
-int indexOfN(string s,char c,int n)
+int lastIndexOf(string s, char c)
 {
-   return 0;
+   int i = 0;
+   int j = -1;
+   while (s[i] != '\0')
+   {
+      if (s[i] == c)
+      {
+         j = i;
+      }
+      i++;
+   }
+   return j;
+}
+
+int indexOfN(string s, char c, int n)
+
+{
+   if (n <= 0)
+   {
+      return -1;
+   }
+   int count = 0;
+   int i = 0;
+   int j = -1;
+   while (s[i] != '\0')
+   {
+      if (s[i] == c)
+      {
+         j = i;
+         count++;
+      }
+      if (count == n)
+      {
+         break;
+      }
+      i++;
+   }
+   if (n > count)
+   {
+      return length(s);
+   }
+   else
+   {
+
+      return j;
+   }
 }
 
 int charToInt(char c)
 {
-   return 0;
+   if(c>='0'&& c<='9'){
+   return c-'0';
+   }else if(c>='A'&& c<='Z'){
+      return c-'0'-7;
+   }else if(c>='a'&& c<='z'){
+      return c-'0'-39;
+   }
+
+
+   
 }
 
 char intToChar(int i)
 {
-   return 'X';
+   
+    if (i >= 0 && i <= 9) {
+        return i + '0'; 
+    }
+    
+    else if (i >= 10 && i <= 35) {
+        return i - 10 + 'A'; 
+    }
+    else if (i >= 65 && i <= 90) {
+        return i - 65 + 'a'; 
+    }
+    
+    else {
+        return '\0';
+    }
 }
 
-int getDigit(int n,int i)
+int getDigit(int n, int i)
 {
-   return 0;
+int r=pow(10,i);
+   if(i<0 || r>abs(n)){return -1;}
+   return (abs(n)/r)%10;
 }
 
 int digitCount(int n)
-{
-   return 0;
+{int grado=1;
+int resto=abs(n);
+   while (resto>1)
+   {
+      resto=(resto/10);
+      grado++;
+   }
+   
+   return grado;
 }
 
 string intToString(int i)
@@ -149,7 +248,7 @@ string intToString(int i)
    return "";
 }
 
-int stringToInt(string s,int b) // ok
+int stringToInt(string s, int b) // ok
 {
    return 0;
 }
@@ -189,32 +288,32 @@ bool isEmpty(string s)
    return true;
 }
 
-bool startsWith(string s,string x)
+bool startsWith(string s, string x)
 {
    return true;
 }
 
-bool endsWith(string s,string x)
+bool endsWith(string s, string x)
 {
    return true;
 }
 
-bool contains(string s,char c)
+bool contains(string s, char c)
 {
    return true;
 }
 
-string replace(string s,char oldChar,char newChar)
+string replace(string s, char oldChar, char newChar)
 {
    return "";
 }
 
-string insertAt(string s,int pos,char c)
+string insertAt(string s, int pos, char c)
 {
    return "";
 }
 
-string removeAt(string s,int pos)
+string removeAt(string s, int pos)
 {
    return "";
 }
@@ -234,7 +333,7 @@ string trim(string s)
    return "";
 }
 
-string replicate(char c,int n)
+string replicate(char c, int n)
 {
    return "";
 }
@@ -244,17 +343,17 @@ string spaces(int n)
    return "";
 }
 
-string lpad(string s,int n,char c)
+string lpad(string s, int n, char c)
 {
    return "";
 }
 
-string rpad(string s,int n,char c)
+string rpad(string s, int n, char c)
 {
    return "";
 }
 
-string cpad(string s,int n,char c)
+string cpad(string s, int n, char c)
 {
    return "";
 }
@@ -299,12 +398,12 @@ string toLowerCase(string s)
    return "";
 }
 
-int cmpString(string a,string b)
+int cmpString(string a, string b)
 {
    return 0;
 }
 
-int cmpDouble(double a,double b)
+int cmpDouble(double a, double b)
 {
    return 0;
 }

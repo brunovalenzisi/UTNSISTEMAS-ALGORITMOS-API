@@ -17,8 +17,8 @@ using namespace std;
 
 int main()
 {  
-   string s="Esta funcion es la funcion mas dificil";
-   cout<<indexOf(s,"funcion",-1) <<endl;
+   int n=-123;
+   cout<<getDigit(n,2) <<endl;
    return 0;
 }
 
