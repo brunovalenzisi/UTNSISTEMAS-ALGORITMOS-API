@@ -17,8 +17,8 @@ using namespace std;
 
 int main()
 {  
-   int n=-123;
-   cout<<getDigit(n,2) <<endl;
+   int n=001;
+   cout<<digitCount(n) <<endl;
    return 0;
 }
 

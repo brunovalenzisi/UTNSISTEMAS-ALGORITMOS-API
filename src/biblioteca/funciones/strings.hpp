@@ -226,7 +226,8 @@ char intToChar(int i)
 
 int getDigit(int n, int i)
 {
-int r=pow(10,i);
+   if(n==0){return 0;}
+   int r=pow(10,i);
    if(i<0 || r>abs(n)){return -1;}
    return (abs(n)/r)%10;
 }
@@ -244,8 +245,15 @@ int resto=abs(n);
 }
 
 string intToString(int i)
-{
-   return "";
+{  int digitos= digitCount(i);
+   string salida="";
+   if (i<0){salida+="-";}
+   for(int j=0;j<digitos;j++){
+      int digit=getDigit(i,digitos-j);
+      char c=intToChar(digit);
+      salida+=c;
+   }
+   return salida;
 }
 
 int stringToInt(string s, int b) // ok
