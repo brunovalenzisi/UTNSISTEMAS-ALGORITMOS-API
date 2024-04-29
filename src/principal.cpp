@@ -17,8 +17,8 @@ using namespace std;
 
 int main()
 {  
-   int n=001;
-   cout<<digitCount(n) <<endl;
+doubleToString(15.5); 
+ 
    return 0;
 }
 

@@ -233,56 +233,103 @@ int getDigit(int n, int i)
 }
 
 int digitCount(int n)
-{int grado=1;
-int resto=abs(n);
-   while (resto>1)
-   {
-      resto=(resto/10);
-      grado++;
-   }
-   
-   return grado;
+{
+    int grado = 0;
+    int resto = abs(n);
+    if (n == 0)
+    {
+        return 1;
+    }
+    while (resto > 1)
+    {
+        resto = (resto / 10);
+        grado++;
+    }
+
+    return grado;
 }
 
 string intToString(int i)
-{  int digitos= digitCount(i);
-   string salida="";
-   if (i<0){salida+="-";}
-   for(int j=0;j<digitos;j++){
-      int digit=getDigit(i,digitos-j);
-      char c=intToChar(digit);
-      salida+=c;
-   }
-   return salida;
+{
+    if (i == 0)
+    {
+        return "0";
+    }
+
+    int digitos = digitCount(i);
+    string salida = "";
+    if (i < 0)
+    {
+        salida += "-";
+    }
+    for (int j = 0; j <= digitos; j++) 
+    {
+        int digit = getDigit(i, digitos - j); 
+        char c = intToChar(digit);
+        salida += c;
+    }
+    return salida;
 }
 
-int stringToInt(string s, int b) // ok
+int stringToInt(string s, int b)
 {
-   return 0;
+    int digitos = length(s);
+    bool negativo = false;
+    int salida = 0;
+    int inicio = 0;
+
+ 
+    if (s[0] == '-')
+    {
+        negativo = true;
+        inicio = 1; 
+    }
+
+    for (int i = inicio; i < digitos; i++)
+    {
+        char c = s[i];
+        salida = salida * b + charToInt(c);
+    }
+
+    if (negativo)
+    {
+        salida *= -1;
+    }
+
+    return salida;
 }
+
 
 int stringToInt(string s) // ok
-{
+{  
+      return stringToInt(s,10);
    return 0;
 }
 
 string charToString(char c)
 {
-   return "";
+   string salida="";
+   salida += c;
+   return salida;
 }
 
 char stringToChar(string s)
-{
-   return 'X';
+{ char c=s[0];
+   return c;
 }
 
 string stringToString(string s)
 {
-   return "";
+   return s;
 }
 
 string doubleToString(double d)
-{
+{ string s="";
+   int parteEntera=static_cast<int>(d);
+   double parteDecimal=d-parteEntera;
+   cout<<parteEntera<<endl;
+   cout<<parteDecimal<<endl;
+
    return "";
 }
 
