@@ -340,52 +340,85 @@ double stringToDouble(string s)
 
 bool isEmpty(string s)
 {
-   return true;
+   return length(s)==0?true:false; 
+   
 }
 
 bool startsWith(string s, string x)
-{
-   return true;
+{  if(x==""){
+   if(s[0]==' '){return true;}else{return false;}
+}
+   string prefijo=substring(s,0,length(x));
+ 
+   return prefijo==x?true:false;
 }
 
 bool endsWith(string s, string x)
-{
-   return true;
+{if(x==""){
+   if(s[length(s)-1]==' '){return true;}else{return false;}
+}
+
+   string sufijo=substring(s,length(s)-length(x));
+   return sufijo==x?true:false;
 }
 
 bool contains(string s, char c)
 {
-   return true;
+bool salida=false;
+for(int i=0;i<length(s);i++){
+   if (s[i]==c){salida=true;
+   break ;}
+}
+   return salida;
 }
 
 string replace(string s, char oldChar, char newChar)
-{
-   return "";
+{ string salida=s;
+   for(int i=0;i<length(s);i++){
+      if(s[i]==oldChar){salida[i]=newChar;}
+   }
+   return salida;
 }
 
 string insertAt(string s, int pos, char c)
 {
-   return "";
+   if(pos>=length(s)){return s + c;}
+   string prefijo = substring(s,0,pos);
+ string sufijo = substring(s,pos);
+   return prefijo + c + sufijo;
 }
 
 string removeAt(string s, int pos)
 {
+   if(pos>=length(s)){return substring(s,0,length(s)-1);}
+   string prefijo = substring(s,0,pos);
+   string sufijo = substring(s,pos+1);
+   return prefijo + sufijo;
    return "";
 }
 
-string ltrim(string s)
-{
-   return "";
+string ltrim(string s) {
+    int i = 0;
+    while (s[i] == ' ') {
+        s = removeAt(s, i);
+    }
+    return s;
 }
 
 string rtrim(string s)
 {
-   return "";
+int i = s.length() - 1;
+    while (i >= 0 && s[i] == ' ') {
+      s=removeAt(s, i);
+        i--; 
+    }
+    return s;
 }
 
 string trim(string s)
-{
-   return "";
+{  s=rtrim(s);
+   s=ltrim(s);
+   return s;
 }
 
 string replicate(char c, int n)

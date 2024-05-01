@@ -16,10 +16,11 @@
 using namespace std;
 
 int main()
-{  
-doubleToString(15.5); 
- 
-   return 0;
+{ 
+
+string s = "Esto   es una prueba"; 
+string r = trim(s); 
+cout << "[" << r << "]" << endl; // [Esto es una prueba]
 }
 
 #endif
