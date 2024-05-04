@@ -16,11 +16,10 @@
 using namespace std;
 
 int main()
-{ 
-
-string s = "Esto   es una prueba"; 
-string r = trim(s); 
-cout << "[" << r << "]" << endl; // [Esto es una prueba]
+{
+\
+cout<<toUpperCase('b')<<endl;
+ 
 }
 
 #endif

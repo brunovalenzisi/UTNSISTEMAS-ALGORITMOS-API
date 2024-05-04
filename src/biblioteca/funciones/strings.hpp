@@ -198,7 +198,7 @@ int charToInt(char c)
    }else if(c>='A'&& c<='Z'){
       return c-'0'-7;
    }else if(c>='a'&& c<='z'){
-      return c-'0'-39;
+      return c-'0'-49+65;
    }
 
 
@@ -422,53 +422,96 @@ string trim(string s)
 }
 
 string replicate(char c, int n)
-{
-   return "";
+{ string salida="";
+for(int i=0 ; i<n ; i++){
+   salida+=c;
+}
+   return salida;
 }
 
 string spaces(int n)
 {
-   return "";
+   string s="";
+for(int i=0;i<n;i++){
+   s+=' ';
+}
+   return s;
 }
 
 string lpad(string s, int n, char c)
-{
-   return "";
+{  int l=length(s);
+   string salida="";
+   if(n>l){
+      salida+=replicate(c,n-l);
+   }
+   salida+=s;
+   return salida;
 }
 
 string rpad(string s, int n, char c)
 {
-   return "";
+   int l=length(s);
+   string salida="";
+   salida+=s;
+   if(n>l){
+      salida+=replicate(c,n-l);
+   }
+   return salida;
 }
 
 string cpad(string s, int n, char c)
 {
-   return "";
+   int l=length(s);
+   string salida="";
+   if(n>l){
+      if((n-l)%2>0){
+         salida+=replicate(c,(n-l)/2);
+         salida+=s;
+         salida+=replicate(c,(n-l)/2+1);
+      }
+      else{
+         salida+=replicate(c,(n-l)/2);
+         salida+=s;
+         salida+=replicate(c,(n-l)/2);
+      }
+   }
+   else{
+      salida+=s;
+   }
+   return salida;
 }
 
 bool isDigit(char c)
 {
-   return true;
+   
+   return (c>='0' && c<='9')?true:false;
 }
 
 bool isLetter(char c)
-{
-   return true;
+{if(c>='A' && c<='Z'){return true;}
+else if(c>='a' && c<='z'){return true;}
+return false;
 }
 
 bool isUpperCase(char c)
 {
-   return true;
+if(c>='A' && c<='Z'){return true;}
+return false;
 }
 
 bool isLowerCase(char c)
 {
-   return true;
+   if(c>='a' && c<='z'){return true;}
+return false;
 }
 
 char toUpperCase(char c)
-{
-   return 'X';
+{if(isLowerCase(c)){
+   int i= charToInt(c);
+   char c=intToChar(i-65+10);
+   return c;
+}
+return c;
 }
 
 char toLowerCase(char c)
