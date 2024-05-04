@@ -17,8 +17,11 @@ using namespace std;
 
 int main()
 {
-\
-cout<<toUpperCase('b')<<endl;
+
+double x = 25.1; 
+double y = 25; 
+cout << cmpDouble(x,y)<<endl;  
+
  
 }
 

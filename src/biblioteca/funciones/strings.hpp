@@ -516,27 +516,47 @@ return c;
 
 char toLowerCase(char c)
 {
-   return 'X';
+   if(isUpperCase(c)){
+   int i= charToInt(c);
+   char c=intToChar(i+65-10);
+   return c;
+}
+return c;
 }
 
 string toUpperCase(string s)
-{
-   return "";
+{string salida="";
+for(int i =0; i < s.length(); i++){
+if(isLowerCase(s[i])){
+   salida+=toUpperCase(s[i]);
+}else{salida+=s[i];}
+}
+   return salida;
 }
 
 string toLowerCase(string s)
 {
-   return "";
+  string salida="";
+for(int i =0; i < s.length(); i++){
+if(isUpperCase(s[i])){
+   salida+=toLowerCase(s[i]);
+}else{salida+=s[i];}
+}
+   return salida;
 }
 
 int cmpString(string a, string b)
 {
-   return 0;
+   if(a>b){return 1;}
+   else if(a<b){return -1;}
+   else if(a==b){return 0;}
 }
 
 int cmpDouble(double a, double b)
 {
-   return 0;
+   if(a>b){return 1;}
+   else if(a<b){return -1;}
+   else if(a==b){return 0;}
 }
 
 #endif
