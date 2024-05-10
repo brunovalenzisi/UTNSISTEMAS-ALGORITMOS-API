@@ -15,14 +15,21 @@
 #include "biblioteca/tads/parte1/MultidimColl.hpp"
 using namespace std;
 
-int main()
-{
+int main(){
+cout<<stringToDouble("-0.12")<<endl;
 
-double x = 25.1; 
-double y = 25; 
-cout << cmpDouble(x,y)<<endl;  
-
- 
 }
 
 #endif
+
+   //double d=0.123456;
+  // int parteEntera=floor(d);
+  // double parteDecimal=d-parteEntera;
+   //double check=parteEntera;
+  // int i=1;
+  // while(check!=d){
+  // check=parteEntera+(trunc(parteDecimal*pow(10,i)))/(pow(10,i));
+  // i++;
+ //  }
+   
+ // cout<<check<<endl;

@@ -6,6 +6,8 @@
 #include <math.h>
 using namespace std;
 
+
+
 int length(string s)
 {
    int i = 0;
@@ -324,18 +326,57 @@ string stringToString(string s)
 }
 
 string doubleToString(double d)
-{ string s="";
-   int parteEntera=static_cast<int>(d);
-   double parteDecimal=d-parteEntera;
-   cout<<parteEntera<<endl;
-   cout<<parteDecimal<<endl;
-
-   return "";
+{  string salida="";
+   double D=fabs(d);
+   if(d<0){salida+='-';};  
+   int parteEntera=floor(D);
+   salida+=intToString(parteEntera);
+   salida+='.';
+   double parteDecimal=D-parteEntera;
+   double check=parteEntera;
+   int i=1;
+   while(check!=D){
+   check=parteEntera+(trunc(parteDecimal*pow(10,i)))/(pow(10,i));
+   int digit=getDigit((trunc(parteDecimal*pow(10,i))),0);
+   char c=intToChar(digit);
+   salida+=c;
+   i++;}
+   
+   return salida;
+  
 }
 
 double stringToDouble(string s)
 {
-   return 1.1;
+bool negativo=false;
+int pos=indexOf(s,'.');
+string parteEnteraString="";
+string parteDecimalString="";
+
+if(s[0]=='-'){
+negativo=true;
+parteEnteraString=substring(s,1,pos);
+parteDecimalString=substring(s,pos+1);
+cout<<"parteEntera: "<<parteDecimalString<<endl;
+cout<<"parteDecimal: "<<parteEnteraString<<endl;
+}
+else{
+parteEnteraString=substring(s,0,pos);
+parteDecimalString=substring(s,pos+1);
+cout<<"parteDecimal: "<<parteDecimalString<<endl;
+cout<<"parteEntera: "<<parteEnteraString<<endl;
+}
+
+
+double salida=0;
+int parteEnteraInt=stringToInt(parteEnteraString);
+int parteDecimalInt=stringToInt(parteDecimalString);
+double parteDecimal=parteDecimalInt/pow(10,length(parteDecimalString));
+salida+=parteEnteraInt+parteDecimal;
+if(negativo){salida*=-1;}
+
+
+   return salida;
 }
 
 bool isEmpty(string s)
