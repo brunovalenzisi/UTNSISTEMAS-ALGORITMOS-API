@@ -16,20 +16,18 @@
 using namespace std;
 
 int main(){
-cout<<stringToDouble("-0.12")<<endl;
+string s = "John|Paul";
+char sep = '|';
+int i = 2;
+removeTokenAt(s,sep,i);
+cout << s << endl; // Salida: John|Paul|Ringo
+i = 0;
+removeTokenAt(s,sep,i);
+cout << s << endl; // Salida: Paul|Ringo
 
 }
 
 #endif
 
-   //double d=0.123456;
-  // int parteEntera=floor(d);
-  // double parteDecimal=d-parteEntera;
-   //double check=parteEntera;
-  // int i=1;
-  // while(check!=d){
-  // check=parteEntera+(trunc(parteDecimal*pow(10,i)))/(pow(10,i));
-  // i++;
- //  }
    
- // cout<<check<<endl;
+   

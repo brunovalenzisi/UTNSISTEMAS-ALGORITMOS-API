@@ -6,29 +6,77 @@
 #include "strings.hpp"
 using namespace std;
 
-int tokenCount(string s,char sep)
+int tokenCount(string s, char sep)
 {
-   return 0;
+   int count = 1;
+   for (int i = 0; i < length(s); i++)
+   {
+      if (s[i] == sep)
+      {
+         count++;
+      }
+   }
+   return (count == 1 && length(s) == 0) ? 0 : count;
 }
 
-void addToken(string& s,char sep,string t)
+void addToken(string &s, char sep, string t)
+{
+   if (s == "")
+   {
+      s += t;
+   }
+   else
+   {
+      s += sep + t;
+   }
+}
+
+string getTokenAt(string s, char sep, int i)
+{
+   string salida = "";
+   if (i == 0)
+   {
+      int posI = 0;
+      int posF = indexOfN(s, sep, i + 1);
+      salida += substring(s, posI, posF);
+   }
+   else
+   {
+      int posI = indexOfN(s, sep, i) + 1;
+      int posF = indexOfN(s, sep, i + 1);
+      salida += substring(s, posI, posF);
+   }
+   return salida;
+}
+
+void removeTokenAt(string &s, char sep, int i)
+{
+   if (i == 0)
+   {
+      int posI = 0;
+      int posF = indexOfN(s,sep,i+1);
+      int longitud = length(substring(s,posI,posF));
+      cout<<"longitud: "<<longitud<<endl;
+      for(i=0;i<=longitud;i++){
+         s=removeAt(s,0);
+      }
+     
+   }else{
+      int posI = indexOfN(s, sep, i) ;
+      int posF = indexOfN(s, sep, i+1);
+      int longitud = length(substring(s,posI,posF));
+      for(i=0;i<longitud;i++){
+         s=removeAt(s,posI);
+      }
+   }
+   
+}
+
+void setTokenAt(string &s, char sep, string t, int i)
 {
 }
 
-string getTokenAt(string s,char sep, int i)
-{
-   return "";
-}
-
-void removeTokenAt(string& s,char sep, int i)
-{
-}
-
-void setTokenAt(string& s,char sep, string t,int i)
-{
-}
-
-int findToken(string s,char sep, string t)
+int findToken(string s, char sep, string t)
 {
    return 0;
 }
