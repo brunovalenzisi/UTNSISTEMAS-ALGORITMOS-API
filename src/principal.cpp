@@ -16,14 +16,12 @@
 using namespace std;
 
 int main(){
-string s = "John|Paul";
+string s = "John|Paul|George|Ringo";
 char sep = '|';
-int i = 2;
-removeTokenAt(s,sep,i);
-cout << s << endl; // Salida: John|Paul|Ringo
-i = 0;
-removeTokenAt(s,sep,i);
-cout << s << endl; // Salida: Paul|Ringo
+
+string t = "Johnn";
+int p = findToken(s,sep,t);
+cout << p << endl; // Salida: 0
 
 }
 

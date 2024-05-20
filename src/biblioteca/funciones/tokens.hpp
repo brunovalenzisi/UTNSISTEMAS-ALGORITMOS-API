@@ -73,12 +73,30 @@ void removeTokenAt(string &s, char sep, int i)
 }
 
 void setTokenAt(string &s, char sep, string t, int i)
-{
+   {string copy=s; 
+    int rep=charCount(s,sep);
+    s="";
+   for(int j =0;j<=rep;j++){
+      if (j!=i){
+         string token=getTokenAt(copy,sep,j);
+         addToken(s,sep,token);
+      }
+      else{
+         addToken(s,sep,t);
+      }
+   }
+  
 }
 
 int findToken(string s, char sep, string t)
-{
-   return 0;
+{  int rep=charCount(s,sep);
+   for(int i=0;i<rep;i++){
+      string n=getTokenAt(s,sep,i);
+      if(n==t){
+         return i;
+      }
+   }
+   return -1;
 }
 
 #endif
