@@ -10,6 +10,7 @@ template<typename T>
 struct Coll
 {  char sep='|';
    string datos="";
+   int pos=0;
    
 };
 
@@ -83,14 +84,37 @@ return-1;
    }
 
 template <typename T>
-void collSort(Coll<T>& c,int cmpTT(T,T),T tFromString(string),string tToString(T))
+void collSort(Coll<T>& c, int cmpTT(T, T), T tFromString(string), string tToString(T))
 {
+    bool ordenar = true;
+    while (ordenar)
+    {
+        bool ordeno = false;
+        for (int i = 0; i < collSize(c) - 1; i++)
+        {
+            for (int j = 0; j < collSize(c) - 1; j++)
+            {
+                T tActual = collGetAt(c, j, tFromString);
+                T tSiguiente = collGetAt(c, j + 1, tFromString);
+                if (cmpTT(tActual, tSiguiente) > 0)
+                {
+                    collSetAt(c, tSiguiente, j, tToString);
+                    collSetAt(c, tActual, j + 1, tToString);
+                    ordeno = true;
+                }
+            }
+        }
+        if (!ordeno)
+        {
+            ordenar = false;
+        }
+    }
 }
 
 template<typename T>
 bool collHasNext(Coll<T> c)
-{
-   return true;
+{  int size=collSize(c);
+   return c.pos+1<size?true:false;
 }
 
 template<typename T>
