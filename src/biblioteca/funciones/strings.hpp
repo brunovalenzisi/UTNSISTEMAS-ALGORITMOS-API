@@ -252,7 +252,7 @@ int digitCount(int n)
    {
       return 1;
    }
-   while (resto > 1)
+   while (resto >= 1)
    {
       resto = (resto / 10);
       grado++;
@@ -268,15 +268,16 @@ string intToString(int i)
       return "0";
    }
 
-   int digitos = digitCount(i);
+   int digitos = digitCount(abs(i)); 
+
    string salida = "";
    if (i < 0)
    {
       salida += "-";
    }
-   for (int j = 0; j <= digitos; j++)
+   for (int j = 0; j < digitos; j++)
    {
-      int digit = getDigit(i, digitos - j);
+      int digit = getDigit(abs(i), digitos - j - 1);
       char c = intToChar(digit);
       salida += c;
    }
