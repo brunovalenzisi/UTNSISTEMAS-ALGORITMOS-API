@@ -11,6 +11,7 @@ struct Coll
 {  char sep='|';
    string datos="";
    int pos=0;
+   bool eoc=false;
    
 };
 
@@ -119,21 +120,31 @@ bool collHasNext(Coll<T> c)
 
 template<typename T>
 T collNext(Coll<T>& c,T tFromString(string))
-{
-   T t;
-   return t;
+{  
+   T token=collGetAt(c,c.pos,tFromString);
+   if(collHasNext(c)){c.pos++;}else{
+      c.pos = 0;
+   }
+   return token; 
+
 }
 
-template<typename T>
+template<typename T>  //revisar si es lo que se pide
 T collNext(Coll<T>& c,bool& endOfColl,T tFromString(string))
-{
-   T t;
-   return t;
+{  if(endOfColl){
+   c.pos = 0;
+   endOfColl = false;
+}
+T token=collGetAt(c,c.pos,tFromString);
+ c.pos++;
+   
+   return token;
 }
 
 template<typename T>
 void collReset(Coll<T>& c)
 {
+   c.pos=0;
 }
 
 #endif

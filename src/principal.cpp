@@ -23,14 +23,12 @@ int cmpInt(int a,int b){
 int main(){
     
 Coll <int>coleccion=coll<int>();
-coleccion.datos="0|1";
-coleccion.pos=1;
+coleccion.datos="0|1|2";
+cout<<collNext(coleccion,stringToInt)<<endl;
+cout<<collNext(coleccion,stringToInt)<<endl;
+cout<<collNext(coleccion,stringToInt)<<endl;
+cout<<collNext(coleccion,stringToInt)<<endl;
 
-cout<<coleccion.datos<<endl;
-
-
-
-cout<<collHasNext(coleccion)<<endl;
 
 
 return 0;
