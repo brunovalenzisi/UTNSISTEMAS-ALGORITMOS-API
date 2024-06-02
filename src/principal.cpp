@@ -14,25 +14,45 @@
 #include "biblioteca/tads/parte1/Coll.hpp"
 #include "biblioteca/tads/parte1/MultidimColl.hpp"
 using namespace std;
-int cmpInt(int a,int b){
 
-    return (a > b) ? 1 : ((a < b) ? -1 : 0);
+struct Fecha{
+    int dia;
+    int mes;
+    int anio;
+};
+Fecha fecha(int dia, int mes, int anio){
+Fecha f;
+f.dia=dia;
+f.mes=mes;
+f.anio=anio;
+return f;
+}
+string fechaToString(Fecha f){
+string salida="";
+salida+=intToString(f.dia);
+salida+='/';
+salida+=intToString(f.mes);
+salida+='/';
+salida+=intToString(f.anio);
+
+return salida;
 }
 
-
 int main(){
-    
-Coll <int>coleccion=coll<int>();
-coleccion.datos="0|1|2";
-cout<<collNext(coleccion,stringToInt)<<endl;
-cout<<collNext(coleccion,stringToInt)<<endl;
-cout<<collNext(coleccion,stringToInt)<<endl;
-cout<<collNext(coleccion,stringToInt)<<endl;
-
-
-
+cout<<intToString(1991)<<endl;
+cout<<"digitos: "<<digitCount(1)<<endl;
+cout<<"digito: "<<getDigit(10,0)<<endl;
+cout<<"digito: "<<getDigit(1991,1)<<endl;
+cout<<"digito: "<<getDigit(1991,2)<<endl;
+cout<<"digito: "<<getDigit(1991,3)<<endl;
+FILE* f = fopen("test.test","w+b");
+write<Fecha>(f,fecha(18,05,1991));
+write<Fecha>(f,fecha(19,05,1991));
+write<Fecha>(f,fecha(20,05,1991));
+seek<Fecha>(f,0);
+cout<<filePos<Fecha>(f)<<endl;
+cout<<fechaToString(read<Fecha>(f));
 return 0;
-
 }
 
 #endif

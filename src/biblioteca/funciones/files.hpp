@@ -6,37 +6,39 @@
 
 template<typename T> void write(FILE* f, T t)
 {
-   // Se debe anteponer esta linea al inicio de la funcion.
-   // De otro modo, apareceran errores al momento de actualizar
-   // archivos. Esto se debe a un error en la implementacion de Windows.
-   //
-   // fseek(f,0,SEEK_CUR);
+fseek(f,0,SEEK_CUR);
+T nuevoT = t;
+fwrite(&t,sizeof(t),1,f);
+
 }
 
 template<typename T> T read(FILE* f)
 {
-   // Se debe anteponer esta linea al inicio de la funcion.
-   // De otro modo, apareceran errores al momento de actualizar
-   // archivos. Esto se debe a un error en la implementacion de Windows.
-   //
-   // fseek(f,0,SEEK_CUR);
+ fseek(f,0,SEEK_CUR);
 
-   T t;
+   T t ;
+   fread(&t,sizeof(t),1,f);
    return t;
 }
 
 template<typename T> void seek(FILE* f, int n)
 {
+   fseek(f,sizeof(T)*n,SEEK_SET);
 }
 
 template<typename T> int fileSize(FILE* f)
 {
-   return 0;
+   fseek(f,0,SEEK_END);
+   int totales=ftell(f);
+   
+   return totales;
 }
 
 template<typename T> int filePos(FILE* f)
-{
-   return 0;
+{  
+   int byteActual=ftell(f);
+   int pos=byteActual/sizeof(T);
+   return pos+1;
 }
 
 #endif

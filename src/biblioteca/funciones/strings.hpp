@@ -230,18 +230,17 @@ char intToChar(int i)
    }
 }
 
-int getDigit(int n, int i)
-{
-   if (n == 0)
-   {
-      return 0;
-   }
-   int r = pow(10, i);
-   if (i < 0 || r > abs(n))
-   {
-      return -1;
-   }
-   return (abs(n) / r) % 10;
+int getDigit(int n, int i) {
+    if (i < 0) {
+        return -1;
+    }
+
+    int r = 1;
+    for (int j = 0; j < i; j++) {
+        r *= 10;
+    }
+
+    return (abs(n) / r) % 10;
 }
 
 int digitCount(int n)
