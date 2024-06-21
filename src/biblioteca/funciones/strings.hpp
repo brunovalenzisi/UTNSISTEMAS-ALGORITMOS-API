@@ -267,7 +267,7 @@ string intToString(int i)
       return "0";
    }
 
-   int digitos = digitCount(abs(i)); 
+   int digitos = digitCount(abs(i));
 
    string salida = "";
    if (i < 0)
@@ -484,7 +484,7 @@ string removeAt(string s, int pos)
    string prefijo = substring(s, 0, pos);
    string sufijo = substring(s, pos + 1);
    return prefijo + sufijo;
-  
+
 }
 
 string ltrim(string s)
@@ -647,11 +647,12 @@ char toLowerCase(char c)
 string toUpperCase(string s)
 {
    string salida = "";
-   for (int i = 0; i < s.length(); i++)
+   for (int i = 0; i < length(s); i++)
    {
-      if (isLowerCase(s[i]))
+      char c=s[i];
+      if (isLowerCase(c))
       {
-         salida += toUpperCase(s[i]);
+         salida += toUpperCase(c);
       }
       else
       {
@@ -664,11 +665,12 @@ string toUpperCase(string s)
 string toLowerCase(string s)
 {
    string salida = "";
-   for (int i = 0; i < s.length(); i++)
+   for (int i = 0; i < length(s); i++)
    {
-      if (isUpperCase(s[i]))
+      char c=s[i];
+      if (isUpperCase(c))
       {
-         salida += toLowerCase(s[i]);
+         salida += toLowerCase(c);
       }
       else
       {
@@ -680,34 +682,13 @@ string toLowerCase(string s)
 
 int cmpString(string a, string b)
 {
-   if (a > b)
-   {
-      return 1;
-   }
-   else if (a < b)
-   {
-      return -1;
-   }
-   else if (a == b)
-   {
-      return 0;
-   }
+   return a>b?1:(a<b?-1:0);
+
 }
 
 int cmpDouble(double a, double b)
 {
-   if (a > b)
-   {
-      return 1;
-   }
-   else if (a < b)
-   {
-      return -1;
-   }
-   else if (a == b)
-   {
-      return 0;
-   }
+   return a>b?1:(a<b?-1:0);
 }
 
 #endif

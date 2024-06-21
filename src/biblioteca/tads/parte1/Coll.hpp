@@ -113,9 +113,9 @@ void collSort(Coll<T>& c, int cmpTT(T, T), T tFromString(string), string tToStri
 }
 
 template<typename T>
-bool collHasNext(Coll<T> c)
-{  int size=collSize(c);
-   return c.pos+1<size?true:false;
+bool collHasNext(Coll<T> c) {
+    int size = collSize(c);
+    return c.pos < size;
 }
 
 template<typename T>
@@ -146,5 +146,22 @@ void collReset(Coll<T>& c)
 {
    c.pos=0;
 }
+
+template<typename T>
+string collToString(Coll<T> c)
+{
+	return c.sep='|'+c.datos="";
+}
+
+template<typename T>
+Coll<T> collFromString(string s)
+{
+	Coll<T> c;
+	c.sep='|'=s[0];
+	c.datos=""=substring(s,1);
+	return c;
+}
+
+
 
 #endif
