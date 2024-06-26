@@ -35,7 +35,7 @@ struct Vuelo
 struct RVuelo
 {
    Vuelo v;
-   int cant=0;
+   int cant;
 };
 
 struct RCliente

@@ -16,7 +16,7 @@
 using namespace std;
 Coll<RCiudad> ciudadSubir(){
         Coll<RCiudad> col;
-        FILE* f = fopen("EQUIPOS.dat","r+b");
+        FILE* f = fopen("CIUDADES.dat","r+b");
         Ciudad c = read<Ciudad>(f);
         while(!feof(f)){
          RCiudad rC=rCiudad(c,0);
@@ -28,12 +28,20 @@ Coll<RCiudad> ciudadSubir(){
     };
 
 
-Coll<RVuelo> vueloSubir()
-{
-   return {};
+Coll<RVuelo> vueloSubir(){ 
+Coll<RVuelo> col;
+FILE* f = fopen("VUELOS.dat","r+b");
+Vuelo vuelo = read<Vuelo>(f);
+while(!feof(f)){
+RVuelo rV= rVuelo(vuelo,0);
+collAdd<RVuelo>(col,rV,rVueloToString);
+vuelo=read<Vuelo>(f);
+}
+fclose(f);
+return col;
 }
 int cmpVuelo(RVuelo vuelo,int destino){
-   return vuelo.v.idDes-destino;
+   return vuelo.v.idVue-destino;
 
 }
 
@@ -41,13 +49,14 @@ int cmpDestino(RCiudad ciudad,int destino){
 return ciudad.c.idCiu-destino;
 
 }
-void procesarPunto1(Reserva r,Coll<RVuelo> cVue,Coll<RCiudad>& cCiu)
-{
-      int vPos = collFind<RVuelo,int>(cVue,r.idVue,cmpVuelo,rVueloFromString);
-      RVuelo vuelo = collGetAt<RVuelo>(cVue,vPos,rVueloFromString);
-      int cPos = collFind<RCiudad,int>(cCiu,vuelo.v.idDes,cmpDestino,rCiudadFromString);
-      RCiudad ciudad = collGetAt<RCiudad>(cCiu,cPos,rCiudadFromString);
+void procesarPunto1(Reserva r,Coll<RVuelo> collVue,Coll<RCiudad>& collCiu)
+{     
+     int vPos = collFind<RVuelo,int>(collVue,r.idVue,cmpVuelo,rVueloFromString);
+      RVuelo vuelo = collGetAt<RVuelo>(collVue,vPos,rVueloFromString);
+      int cPos = collFind<RCiudad,int>(collCiu,vuelo.v.idDes,cmpDestino,rCiudadFromString);
+      RCiudad ciudad = collGetAt<RCiudad>(collCiu,cPos,rCiudadFromString);
       ciudad.cant++;
+      collSetAt<RCiudad>(collCiu,ciudad,cPos,rCiudadToString);
 }
 
 void procesarPunto2(Reserva r,Coll<RVuelo>& cVue)
@@ -57,7 +66,9 @@ RVuelo vuelo = collGetAt<RVuelo>(cVue,vPos,rVueloFromString);
 if(vuelo.v.cap>=r.cant){
    vuelo.v.cap-=r.cant;
 }
-else(vuelo.cant+=r.cant);
+else{vuelo.cant+=r.cant;
+};
+collSetAt<RVuelo>(cVue,vuelo,vPos,rVueloToString);
 
 }
 
@@ -77,12 +88,13 @@ void procesarPunto3(Reserva r,Coll<RVuelo> cVue,Coll<RCiudad> cCiu,Coll<RCliente
       RCliente cliente = collGetAt<RCliente>(cCli,posCliente,rClienteFromString);
       int puntos=abs(ciudadOri.c.millas-ciudadDes.c.millas)*r.cant;
       cliente.acum+=puntos;
+      collSetAt<RCliente>(cCli,cliente,posCliente,rClienteToString);
       }
 
 }
 
 
-void descubrirCliente(Reserva r,Coll<RCliente> coll){
+void descubrirCliente(Reserva r,Coll<RCliente> & coll ){
    int posCliente=collFind<RCliente>(coll,r.idCli,cmpCliente,rClienteFromString);
    if(posCliente<0){
       RCliente nuevoCliente=rCliente(r.idCli,0);
@@ -126,14 +138,13 @@ void resultadoPunto3(Coll<RCliente> cCli)
 int main()
 {
    Coll<RCiudad> cCiu = ciudadSubir(); // 7
-   Coll<RVuelo> cVue = vueloSubir();   // 8
+   Coll<RVuelo> cVue = vueloSubir();
    Coll<RCliente> cCli = coll<RCliente>();
-
    FILE* f = fopen("RESERVAS.dat","r+b");
-
    Reserva r = read<Reserva>(f);
    while( !feof(f) )
-   {  descubrirCliente(r,cCli);
+   {  
+      descubrirCliente(r,cCli);
       procesarPunto1(r,cVue,cCiu);      // 1
       procesarPunto3(r,cVue,cCiu,cCli); // 3
       procesarPunto2(r,cVue);           // 2
