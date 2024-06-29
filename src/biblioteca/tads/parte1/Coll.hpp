@@ -150,15 +150,15 @@ void collReset(Coll<T>& c)
 template<typename T>
 string collToString(Coll<T> c)
 {
-	return c.sep='|'+c.datos="";
+	return c.sep+c.datos;
 }
 
 template<typename T>
 Coll<T> collFromString(string s)
 {
 	Coll<T> c;
-	c.sep='|'=s[0];
-	c.datos=""=substring(s,1);
+	c.sep=s[0];
+	c.datos=substring(s,1);
 	return c;
 }
 

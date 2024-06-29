@@ -12,7 +12,7 @@
 #include "../../biblioteca/tads/parte2/Queue.hpp"
 #include "../../biblioteca/tads/parte1/Coll.hpp"
 #include "../../biblioteca/tads/parte1/MultidimColl.hpp"
-#include "../auxiliares.hpp"
+#include "./auxiliares.hpp"
 using namespace std;
 
     
