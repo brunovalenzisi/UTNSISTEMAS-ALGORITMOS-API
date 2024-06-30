@@ -14,7 +14,7 @@ using namespace std;
 struct Producto
 {
 	int idProd;
-	char descr[20];
+	char descr[8];
 	double precio;
 	int idRub;
 };
