@@ -2,6 +2,7 @@
 #define _MAIN
 
 #include <iostream>
+#include <windows.h>
 #include "../../biblioteca/funciones/strings.hpp"
 #include "../../biblioteca/funciones/tokens.hpp"
 #include "../../biblioteca/funciones/files.hpp"
