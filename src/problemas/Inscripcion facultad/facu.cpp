@@ -15,13 +15,36 @@
 #include "./auxiliares.hpp"
 using namespace std;
 
+int cmpNombreMateria(Materia mat,char nombreMat[20]){
+return mat.nombre-nombreMat;
+}
 
 Coll<Curso> cursosCargar(){
     Coll<Curso> coll;
+    FILE* f=fopen("CURSOS.dat","r+b");
+    Curso cur=read<Curso>(f);
+    while(!feof(f)){
+        collAdd<Curso>(coll,cur,cursoToString);
+        cur=read<Curso>(f);
+    }
     return coll;
 };
-Coll<Materia> materiasDescubrir(Coll<Curso> collCur){
+Coll<Materia> materiasDescubrir(Coll<Curso> &collCur){
     Coll<Materia> coll;
+    while(collHasNext(collCur)){
+    Curso cur=collNext<Curso>(collCur,cursoFromString);
+    int posMateria=collFind<Materia>(coll,cur.materia,cmpNombreMateria,materiaFromString);
+    if(posMateria<0){
+        Coll<Curso> collCursosVacia;
+        collAdd<Curso>(collCursosVacia,cur,cursoToString);
+        Materia nuevaMat=materia(cur.materia,collCursosVacia);
+        collAdd<Materia>(coll,nuevaMat,materiaToString);
+    }else{
+        Materia matEncontrada = collGetAt<Materia>(coll,posMateria,materiaFromString);
+        collAdd(matEncontrada.cursosDisponibles,cur,cursoToString);
+    }
+    }
+    collReset(collCur);
     return coll;
 };
 
@@ -32,9 +55,6 @@ return cur.idCur-idCur;
 
 int cmpIdAlu(Alumno alu,int idAlu){
 return alu.idAlu-idAlu;
-}
-int cmpNombreMateria(Materia mat,char nombreMat[20]){
-return mat.nombre-nombreMat;
 }
 
 void inscribir(Inscripcion i,Coll<Curso> &collCur,Coll<Alumno> &collAlu,Coll<Materia> collMat){
@@ -74,6 +94,7 @@ void actualizarCursosPorMateria(Coll<Curso> &collCur,Coll<Materia> &collMat){
 int main(){
     Coll<Curso> collCursos=cursosCargar();
     Coll<Materia> collMaterias = materiasDescubrir(collCursos);
+//Aca hay bardo   
     Coll<Alumno> collAlumnos;
     FILE* f=fopen("INSCRIPCIONES.dat","w+b");
     Inscripcion ins=read<Inscripcion>(f);
@@ -81,6 +102,7 @@ int main(){
          
         inscribir(ins,collCursos,collAlumnos,collMaterias);
         actualizarCursosPorMateria(collCursos,collMaterias);
+        
 
 
     }
