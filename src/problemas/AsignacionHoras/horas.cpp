@@ -63,7 +63,32 @@ void procesarHora(Hora h,Coll<RProyecto> &collRProyectos,Coll<REmpleado> &collRE
     collSetAt<RProyecto>(collRProyectos,rProyecto,posRProyecto,rProyectoToString);
 };
 
-void mostrarAsignacion(Coll<RProyecto> coll){
+
+
+void mostrarProyecto(RProyecto rP){
+Coll<REmpleado> collREmp=rP.collREmpleados;
+collReset(collREmp);
+cout<<replicate('*',100)<<endl;
+cout<<"Proyecto: "<<rP.proyecto.descripcion<<" Hs. Asignadas: "<<rP.proyecto.horasAsignadas<<" Hs. Inputadas: "<<rP.proyecto.horasImputadas<<endl;
+while(collHasNext(collREmp)){
+    REmpleado rEmp=collNext<REmpleado>(collREmp,rEmpleadoFromString);
+    Coll<Tarea> collTareas=rEmp.collTareas;
+    collReset(collTareas);
+    cout<<"Empleado: "<<rEmp.empleado.nombre<<" Total Horas: "<<rEmp.horasProyecto<<endl;
+    cout<<    "Fecha"<<replicate(' ',20)<<"Tarea desarrollada"<<replicate(' ',20)<<"Horas"<<endl;
+    while(collHasNext(collTareas)){
+        Tarea t=collNext<Tarea>(collTareas,tareaFromString);
+        cout<<t.fecha<<replicate(' ',20)<<t.descripcionTarea<<replicate(' ',20)<<t.horas<<endl;
+    }
+}
+}
+
+void mostrarAsignacion(Coll<RProyecto> &coll){
+    collReset(coll);
+    while(collHasNext(coll)){
+        RProyecto rProyecto=collNext<RProyecto>(coll,rProyectoFromString);
+        mostrarProyecto(rProyecto);
+    }
 
 
 };
