@@ -6,7 +6,9 @@
 template <typename T>
 int add(T arr[],int& len,T e)
 {
-   return 0;
+   arr[len]=e;
+   len++;
+   return len-1;
 }
 
 template <typename T>
