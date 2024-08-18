@@ -19,21 +19,28 @@ using namespace std;
 
 
 
+
+
+ int cmpInt(int a, int b){
+return a-b;
+ }
+
+ 
 int main(){
-   string a[10]; // array 
-int len = 0;  // longitud 
+
+Array<int> a = array<int>(); 
+arrayAdd<int>(a,2); 
+arrayAdd<int>(a,1); 
+arrayAdd<int>(a,3); 
  
-add<string>(a,len,"John"); 
-add<string>(a,len,"Paul"); 
-add<string>(a,len,"George"); 
-add<string>(a,len,"Ringo"); 
- 
-// recorro y muestro 
-for(int i=0; i<len; i++) 
-{cout << a[i] << endl; 
+// ordeno 
+arraySort<int>(a,cmpInt);
+for(int i =0;i<arraySize(a);i++){
+cout<<*(arrayGet<int>(a,i))<<endl;
 }
-   return 0;
+
 }
+
 
 
 
