@@ -23,7 +23,7 @@ void redimensionar(Array<T>& a)
    for (int i = 0; i < a.len; i++) {
       newArr[i] = a.arr[i];
    }
-   delete a.arr;  // Liberar la memoria del arreglo antiguo
+   delete[] a.arr;  // Liberar la memoria del arreglo antiguo
    a.arr = newArr;
    a.size += 10;
 }
@@ -39,6 +39,7 @@ Array<T> array()
    Array<T> ret;
    ret.len=0;
    ret.size=10;
+   ret.arr = new T[ret.size];
    return ret;
 }
 
@@ -92,7 +93,7 @@ template<typename T>
 void arrayRemoveAll(Array<T>& a)
 {
    T* newArr=new T[10];
-   delete a.arr;
+   delete[] a.arr;
    a.arr=newArr;
    a.len=0;
    a.size=10;

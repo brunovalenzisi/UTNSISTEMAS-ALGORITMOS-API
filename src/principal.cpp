@@ -21,24 +21,29 @@ using namespace std;
 
 
 
- int cmpInt(int a, int b){
-return a-b;
- }
 
  
 int main(){
-
-Array<int> a = array<int>(); 
-arrayAdd<int>(a,2); 
-arrayAdd<int>(a,1); 
-arrayAdd<int>(a,3); 
+Map<int,string> m = map<int,string>();
+mapDiscover<int,string>(m,1,"Uno"); 
+mapDiscover<int,string>(m,2,"Dos"); 
+mapDiscover<int,string>(m,3,"Tres"); 
+mapDiscover<int,string>(m,1,"Uno"); 
+mapDiscover<int,string>(m,2,"Dos"); 
+mapDiscover<int,string>(m,4,"Cuatro"); 
+mapDiscover<int,string>(m,3,"Tres"); 
+mapDiscover<int,string>(m,4,"Cuatro"); 
  
-// ordeno 
-arraySort<int>(a,cmpInt);
-for(int i =0;i<arraySize(a);i++){
-cout<<*(arrayGet<int>(a,i))<<endl;
+mapReset<int,string>(m); 
+while( mapHasNext<int,string>(m) ) 
+{ 
+   string* s = mapNextValue<int,string>(m); 
+   cout << *s << endl; 
 }
 
+
+
+return 0;
 }
 
 
