@@ -163,11 +163,67 @@ V* mapDiscover(Map<K,V>& m,K k,V v)
 template<typename K,typename V>
 void mapSortByKeys(Map<K,V>& m,int cmpKK(K,K))
 {
+ bool ordenar = true;
+    while (ordenar)
+    {
+        bool ordeno = false;
+        for (int i = 0; i < m.len - 1; i++)
+        {
+            for (int j = 0; j < m.len - 1; j++)
+            {
+                K kActual = *arrayGet(m.keys,j);
+                K kSiguiente = *arrayGet(m.keys,j+1);
+                V vActual = *arrayGet(m.values,j);
+                V vSiguiente = *arrayGet(m.values,j+1);
+
+                if (cmpKK(kActual, kSiguiente) > 0)
+                {
+                    *arrayGet(m.keys,j)=kSiguiente;
+                    *arrayGet(m.keys,j+1)=kActual;
+                    *arrayGet(m.values,j)=vSiguiente;
+                    *arrayGet(m.values,j+1)=vActual;
+                    ordeno = true;
+                }
+            }
+        }
+        if (!ordeno)
+        {
+            ordenar = false;
+        }
+    }
 }
 
 template<typename K,typename V>
 void mapSortByValues(Map<K,V>& m,int cmpVV(V,V))
 {
+ bool ordenar = true;
+    while (ordenar)
+    {
+        bool ordeno = false;
+        for (int i = 0; i < m.len - 1; i++)
+        {
+            for (int j = 0; j < m.len - 1; j++)
+            {
+                K kActual = *arrayGet(m.keys,j);
+                K kSiguiente = *arrayGet(m.keys,j+1);
+                V vActual = *arrayGet(m.values,j);
+                V vSiguiente = *arrayGet(m.values,j+1);
+
+                if (cmpVV(vActual, vSiguiente) > 0)
+                {
+                    *arrayGet(m.keys,j)=kSiguiente;
+                    *arrayGet(m.keys,j+1)=kActual;
+                    *arrayGet(m.values,j)=vSiguiente;
+                    *arrayGet(m.values,j+1)=vActual;
+                    ordeno = true;
+                }
+            }
+        }
+        if (!ordeno)
+        {
+            ordenar = false;
+        }
+    }
 }
 
 #endif

@@ -17,7 +17,9 @@
 #include "principal.hpp"
 using namespace std;
 
-
+int cmpVV(string a, string b) {
+return cmpString(a,b);
+}
 
 
 
@@ -25,16 +27,17 @@ using namespace std;
  
 int main(){
 Map<int,string> m = map<int,string>();
-mapDiscover<int,string>(m,1,"Uno"); 
 mapDiscover<int,string>(m,2,"Dos"); 
+mapDiscover<int,string>(m,1,"Uno"); 
 mapDiscover<int,string>(m,3,"Tres"); 
+mapDiscover<int,string>(m,4,"Cuatro"); 
 mapDiscover<int,string>(m,1,"Uno"); 
 mapDiscover<int,string>(m,2,"Dos"); 
-mapDiscover<int,string>(m,4,"Cuatro"); 
 mapDiscover<int,string>(m,3,"Tres"); 
 mapDiscover<int,string>(m,4,"Cuatro"); 
  
 mapReset<int,string>(m); 
+mapSortByValues<int,string>(m,cmpVV);
 while( mapHasNext<int,string>(m) ) 
 { 
    string* s = mapNextValue<int,string>(m); 
