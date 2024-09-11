@@ -10,6 +10,7 @@ using namespace std;
 template<typename T>
 struct List
 {
+   
 };
 
 template<typename T>
