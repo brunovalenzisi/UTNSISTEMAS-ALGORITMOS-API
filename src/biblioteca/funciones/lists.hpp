@@ -7,6 +7,8 @@
 template <typename T>
 struct Node
 {
+T info;
+Node* sig;
 };
 
 template <typename T>
