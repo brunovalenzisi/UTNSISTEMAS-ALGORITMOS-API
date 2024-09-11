@@ -13,14 +13,35 @@ Node* sig;
 
 template <typename T>
 Node<T>* add(Node<T>*& p,T e)
-{
-   return NULL;
+{  
+Node<T>* n = new Node();
+n->info=e;
+n->sig=NULL;
+if(p!=NULL){
+Node* aux=p;
+while(aux->sig !=NULL){
+aux=aux->sig;
+}
+aux->sig=n;
+}else{
+p=n;
+}
+
+return n;
 }
 
 template <typename T>
 Node<T>* addFirst(Node<T>*& p,T e)
 {
-   return NULL;
+   Node<T> n;
+   n.info=e;
+   n.sig=aux;
+   p.sig=NULL;
+   p=n;
+   Node* aux=p;
+
+
+   return &p;
 }
 
 template <typename T, typename K>
