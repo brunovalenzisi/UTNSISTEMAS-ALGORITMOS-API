@@ -8,17 +8,18 @@ template <typename T>
 struct Node
 {
 T info;
-Node* sig;
+Node<T>* sig;
 };
 
 template <typename T>
 Node<T>* add(Node<T>*& p,T e)
 {  
-Node<T>* n = new Node();
+Node<T>* n = new Node<T>();
 n->info=e;
 n->sig=NULL;
-if(p!=NULL){
-Node* aux=p;
+if(p!=NULL)
+{
+Node<T>* aux=p;
 while(aux->sig !=NULL){
 aux=aux->sig;
 }
@@ -32,16 +33,12 @@ return n;
 
 template <typename T>
 Node<T>* addFirst(Node<T>*& p,T e)
-{
-   Node<T> n;
-   n.info=e;
-   n.sig=aux;
-   p.sig=NULL;
-   p=n;
-   Node* aux=p;
-
-
-   return &p;
+{  
+ Node<T>* n = new Node<T>();
+    n->info = e;
+    n->sig = p;
+    p = n;
+    return n;
 }
 
 template <typename T, typename K>
