@@ -17,14 +17,12 @@
 #include "principal.hpp"
 using namespace std;
 
- 
-int main(){
+ int cmpInt(int a , int b){
+    return a-b;
+ }
 
-Node<int>* p = NULL; 
-addFirst<int>(p,1); 
-addFirst<int>(p,2); 
-addFirst<int>(p,3); // p->{3,2,1}
-
+template<typename T>
+ void mostrarLista(Node<T>* & p){
 Node<int>* aux=new Node<int>();
 aux=p;
 while(aux->sig !=NULL){
@@ -35,10 +33,23 @@ if(aux->sig==NULL){
     cout<<aux->info<<endl;
 }
 
+
+ }
+int main(){
+Node<int>* p = NULL; 
+add<int>(p,1); 
+add<int>(p,2); 
+add<int>(p,3); // p->{1,2,3} 
+ 
+int e = remove<int,int>(p,3,cmpInt); // p->{1,3} 
+cout << e << endl; // Salida: 2 
+cout<<replicate('*',20)<<endl;
+ 
+
+mostrarLista(p);
+
+
 return 0;
 }
-
-
-
 
 #endif

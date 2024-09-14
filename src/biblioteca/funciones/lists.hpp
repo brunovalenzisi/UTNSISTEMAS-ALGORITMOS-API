@@ -43,9 +43,39 @@ Node<T>* addFirst(Node<T>*& p,T e)
 
 template <typename T, typename K>
 T remove(Node<T>*& p,K k,int cmpTK(T,K))
-{
-   T t;
-   return t;
+{  
+   T ret;
+
+   if(p->sig==NULL && cmpTK(p->info,k)==0){
+   ret=p->info;
+   p=NULL;
+   return ret;
+} 
+
+if(p->sig !=NULL && cmpTK(p->info,k)==0){
+   ret=p->info;
+   p=p->sig;
+   return ret;
+}
+
+   Node<T>* aux=p->sig;
+   Node<T>* initNode=p;
+
+   while(aux->sig!=NULL){
+      if(cmpTK(aux->info,k)==0){
+         initNode->sig=aux->sig;
+         ret=aux->info;
+         return ret;
+      }
+      initNode=aux;
+      aux=aux->sig;
+   }
+   if(cmpTK(aux->info,k)==0){
+   ret=aux->info;
+   initNode->sig=NULL;
+   return ret;
+}  
+   return ret;
 }
 
 template <typename T>
