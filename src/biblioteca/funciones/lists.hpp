@@ -81,7 +81,15 @@ if(p->sig !=NULL && cmpTK(p->info,k)==0){
 template <typename T>
 T removeFirst(Node<T>*& p)
 {
-   T t;
+   T t= p->info;
+   if(p->sig!=NULL){
+      t=p->info;
+      p=p->sig;
+   }
+   else{
+   p=NULL;
+   } 
+   
    return t;
 }
 

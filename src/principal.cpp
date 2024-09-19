@@ -38,11 +38,10 @@ if(aux->sig==NULL){
 int main(){
 Node<int>* p = NULL; 
 add<int>(p,1); 
-add<int>(p,2); 
-add<int>(p,3); // p->{1,2,3} 
+
  
-int e = remove<int,int>(p,3,cmpInt); // p->{1,3} 
-cout << e << endl; // Salida: 2 
+int e = removeFirst(p); // p->{2,3} 
+cout << e << endl;
 cout<<replicate('*',20)<<endl;
  
 
