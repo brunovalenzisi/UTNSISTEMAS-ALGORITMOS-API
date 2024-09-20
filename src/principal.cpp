@@ -37,16 +37,12 @@ if(aux->sig==NULL){
  }
 int main(){
 Node<int>* p = NULL; 
-add<int>(p,1); 
-
- 
-int e = removeFirst(p); // p->{2,3} 
-cout << e << endl;
-cout<<replicate('*',20)<<endl;
- 
+orderedInsert<int>(p,2,cmpInt); 
+orderedInsert<int>(p,3,cmpInt); 
+orderedInsert<int>(p,1,cmpInt); // p->{1,2,3}
+orderedInsert<int>(p,4,cmpInt); // p->{1,2,3}
 
 mostrarLista(p);
-
 
 return 0;
 }

@@ -95,14 +95,70 @@ T removeFirst(Node<T>*& p)
 
 template <typename T, typename K>
 Node<T>* find(Node<T>* p,K k,int cmpTK(T,K))
-{
+{  
+   if(cmpTK(p->info,k)==0){
+      return p;
+   }
+   while(p->sig!=NULL){
+      if(cmpTK(p->info,k)==0){
+         return p;
+      }else{
+         p=p->sig;
+      }
+}
+   if(cmpTK(p->info,k)==0){
+      return p;
+   }
    return NULL;
 }
 
 template <typename T>
 Node<T>* orderedInsert(Node<T>*& p,T e,int cmpTT(T,T))
-{
-   return NULL;
+{     
+   Node<T>* aux=p;
+   Node<T>* pL=new Node<T>();
+   Node<T>* nNode=new Node<T>();
+   nNode->info=e;
+
+   if(p==NULL){
+      p=new Node<T>();
+      p->info=e;
+      p->sig=NULL;
+   return p;
+   }
+   if(p->sig==NULL){
+
+   if(cmpTT(p->info,e)>0){
+   nNode->sig=p;
+   p=nNode;
+   return p;
+   }else{
+      p->sig=nNode;
+      nNode->sig=NULL;
+      return nNode;
+   }
+   }
+   else{
+         if(cmpTT(aux->info,e)>=0){
+           nNode->sig=p;
+           p=nNode;                         
+            return p;
+         }
+         else{
+            while(aux->sig!=NULL){
+               pL=aux;
+               aux=aux->sig;
+               if(cmpTT(aux->info,e)>=0){
+                  pL->sig=nNode;
+                  nNode->sig=aux;
+                  return nNode;
+               }
+         }
+         aux->sig=nNode;
+         nNode->sig=NULL;
+         return nNode;
+      }
+   }
 }
 
 template <typename T>
