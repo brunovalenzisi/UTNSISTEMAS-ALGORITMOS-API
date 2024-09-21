@@ -36,12 +36,20 @@ if(aux->sig==NULL){
 
  }
 int main(){
-Node<int>* p = NULL;
-add<int>(p,1); 
-add<int>(p,2); 
-add<int>(p,3); // p->{1,2,3}  
-free<int>(p);  // p->NULL
-mostrarLista(p);
+Node<int>* q = NULL; 
+enqueue<int>(q,1); // {1}<-q 
+cout<<q->info<<endl;
+enqueue<int>(q,2); // {1,2}<-q 
+cout<<q->info<<endl;
+enqueue<int>(q,3); // {1,2,3}<-q 
+cout<<q->info<<endl;
+cout<<q->sig->info<<endl;
+
+ 
+int e = dequeue<int>(q); // {2,3}<-q 
+cout << e << endl; // Salida: 1
+
+//mostrarLista(q);
 
 return 0;
 }

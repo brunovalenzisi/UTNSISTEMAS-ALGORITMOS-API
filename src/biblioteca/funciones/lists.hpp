@@ -232,38 +232,95 @@ void free(Node<T>*& p)
 template <typename T>
 Node<T>* push(Node<T>*& p,T e)
 {
-   return NULL;
+   
+   return addFirst<T>(p,e);
 }
 
 template <typename T> T pop(Node<T>*& p)
 {
-   T t;
+   T t =p->info;
+   removeFirst(p);   
    return t;
 }
 
 template <typename T>
-Node<T>* enqueue(Node<T>*& p,Node<T>*& q,T e)
-{
-   return NULL;
+Node<T>* enqueue(Node<T>*& p, Node<T>*& q, T e) {
+    Node<T>* nuevoNodo = new Node<T>{e, nullptr};
+    
+    if (q == nullptr) {
+        p = nuevoNodo;
+        q = nuevoNodo;
+    } else {
+        q->sig = nuevoNodo;
+        q = nuevoNodo; 
+    }
+
+    return nuevoNodo;
 }
+
 
 template <typename T>
 Node<T>* enqueue(Node<T>*& q,T e)
 {
-   return NULL;
+   Node<T>* newNode=new Node<T>();
+   newNode->info=e;
+   if(q==NULL){
+      q=newNode;
+      q->sig=q;
+      return q;
+   }
+      Node<T>* first = q->sig;
+   q->sig=newNode;
+   newNode->sig=first;
+   q=newNode;
+   return newNode;
 }
 
 template <typename T>
-T dequeue(Node<T>*& p, Node<T>*& q)
-{
-   T t;
-   return t;
+T dequeue(Node<T>*& p, Node<T>*& q) {
+    if (p == nullptr) {
+return NULL;    }
+
+    T t = p->info;
+
+    if (p == q) {
+        delete p;     
+        p = NULL; 
+    } else {
+        Node<T>* temp = p;  
+        p = p->sig;         
+        delete temp;        
+    }
+
+    return t;
 }
+
 
 template <typename T>
 T dequeue(Node<T>*& q)
 {
-   T t;
+if(q==NULL){
+
+   return NULL;
+}
+   T t=q->sig->info;
+   if(q->sig==q){
+      delete q;
+      q==NULL;
+   }else{
+      Node<T>* first = q->sig;
+        T t = first->info;
+
+    if (q == first) {
+        delete first;  
+        q = NULL;    
+    } else {
+        q->sig = first->sig;  
+        delete first;         
+    }
+
+    
+   }
    return t;
 }
 
