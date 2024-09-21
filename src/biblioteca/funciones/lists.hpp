@@ -96,6 +96,9 @@ T removeFirst(Node<T>*& p)
 template <typename T, typename K>
 Node<T>* find(Node<T>* p,K k,int cmpTK(T,K))
 {  
+       if (p == NULL) {
+        return NULL;
+    }
    if(cmpTK(p->info,k)==0){
       return p;
    }
@@ -163,24 +166,67 @@ Node<T>* orderedInsert(Node<T>*& p,T e,int cmpTT(T,T))
 
 template <typename T>
 Node<T>* searchAndInsert(Node<T>*& p,T e,bool& enc,int cmpTT(T,T))
-{
-   return NULL;
+{  
+   Node<T>* found=find<T,T>(p,e,cmpTT);
+   if(found==NULL){
+      enc=false;
+      return orderedInsert(p,e,cmpTT);
+   }else{
+      enc=true;
+      return found;
+   }
 }
 
 template <typename T>
-void sort(Node<T>*& p,int cmpTT(T,T))
-{
+void sort(Node<T>*& head, int cmpTT(T, T)) {
+    if (head == NULL || head->sig == NULL) {
+        
+        return;
+    }
+
+    bool ordenar = true;
+    while (ordenar) {
+        bool ordeno = false;
+        Node<T>* current = head;
+        Node<T>* prev = NULL;
+        while (current != NULL && current->sig != NULL) {
+            Node<T>* next = current->sig;
+            if (cmpTT(current->info, next->info) > 0) {
+                
+                if (prev != NULL) {
+                    prev->sig = next;
+                } else {
+                   
+                    head = next;
+                }
+                current->sig = next->sig;
+                next->sig = current;
+                ordeno = true;
+            }
+            prev = current;
+            current = current->sig;
+        }
+
+        if (!ordeno) {
+            ordenar = false;
+        }
+    }
 }
 
 template <typename T>
 bool isEmpty(Node<T>* p)
-{
-   return true;
+{ 
+   return p==NULL;
 }
 
 template <typename T>
 void free(Node<T>*& p)
 {
+   while (p != NULL) {
+        Node<T>* temp = p;  
+        p = p->sig;         
+    }
+    p = NULL;
 }
 
 template <typename T>

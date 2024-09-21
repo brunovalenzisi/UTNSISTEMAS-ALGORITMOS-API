@@ -36,12 +36,11 @@ if(aux->sig==NULL){
 
  }
 int main(){
-Node<int>* p = NULL; 
-orderedInsert<int>(p,2,cmpInt); 
-orderedInsert<int>(p,3,cmpInt); 
-orderedInsert<int>(p,1,cmpInt); // p->{1,2,3}
-orderedInsert<int>(p,4,cmpInt); // p->{1,2,3}
-
+Node<int>* p = NULL;
+add<int>(p,1); 
+add<int>(p,2); 
+add<int>(p,3); // p->{1,2,3}  
+free<int>(p);  // p->NULL
 mostrarLista(p);
 
 return 0;
