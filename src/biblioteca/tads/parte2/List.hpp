@@ -10,20 +10,32 @@ using namespace std;
 template<typename T>
 struct List
 {
-   
+   Node<T>* iNode=NULL;
+   Node<T>* fNode=NULL;
+   int size;
 };
 
 template<typename T>
 List<T> list()
 {
    List<T> lst;
+   lst.size=0;
    return lst;
 }
 
+
 template<typename T>
-T* listAdd(List<T>& lst,T e)
-{
-   return NULL;
+T* listAdd(List<T>& lst, T e) {
+   Node<T>* node; 
+   node= add(lst.iNode, e);
+   if(lst.size==0){
+      lst.iNode=node;
+      lst.fNode=node;
+   }else{
+      lst.fNode=node;
+   }
+      lst.size++;
+       return &(node->info); 
 }
 
 template<typename T>

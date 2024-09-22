@@ -36,18 +36,26 @@ if(aux->sig==NULL){
 
  }
 int main(){
-Node<int>* q = NULL; 
-enqueue<int>(q,1); // {1}<-q 
-cout<<q->info<<endl;
-enqueue<int>(q,2); // {1,2}<-q 
-cout<<q->info<<endl;
-enqueue<int>(q,3); // {1,2,3}<-q 
-cout<<q->info<<endl;
-cout<<q->sig->info<<endl;
+List<int> lst = list<int>();  
+// agregamos elementos 
+cout<<*listAdd<int>(lst,1)<<endl;
+cout<<replicate('*',20)<<endl;
+cout<<lst.iNode->info<<endl;
+cout<<lst.fNode->info<<endl;
+cout<<replicate('*',20)<<endl;
 
- 
-int e = dequeue<int>(q); // {2,3}<-q 
-cout << e << endl; // Salida: 1
+cout<<*listAdd<int>(lst,2)<<endl; 
+cout<<replicate('*',20)<<endl;
+cout<<lst.iNode->info<<endl;
+cout<<lst.fNode->info<<endl;
+cout<<replicate('*',20)<<endl;
+cout<<*listAdd<int>(lst,3)<<endl; 
+cout<<replicate('*',20)<<endl;
+cout<<lst.iNode->info<<endl;
+cout<<lst.fNode->info<<endl;
+cout<<replicate('*',20)<<endl;
+
+cout<<lst.size<<endl;
 
 //mostrarLista(q);
 
