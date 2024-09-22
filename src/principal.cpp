@@ -38,18 +38,24 @@ if(aux->sig==NULL){
 int main(){
 List<int> lst = list<int>();  
 // agregamos elementos 
-cout<<*listAdd<int>(lst,1)<<endl;
+cout<<*listAddFirst<int>(lst,1)<<endl;
 cout<<replicate('*',20)<<endl;
 cout<<lst.iNode->info<<endl;
 cout<<lst.fNode->info<<endl;
 cout<<replicate('*',20)<<endl;
 
-cout<<*listAdd<int>(lst,2)<<endl; 
+cout<<*listAddFirst<int>(lst,2)<<endl; 
 cout<<replicate('*',20)<<endl;
 cout<<lst.iNode->info<<endl;
 cout<<lst.fNode->info<<endl;
 cout<<replicate('*',20)<<endl;
-cout<<*listAdd<int>(lst,3)<<endl; 
+cout<<*listAddFirst<int>(lst,3)<<endl; 
+cout<<replicate('*',20)<<endl;
+cout<<lst.iNode->info<<endl;
+cout<<lst.fNode->info<<endl;
+cout<<replicate('*',20)<<endl;
+
+listRemove<int>(lst,1,cmpInt);
 cout<<replicate('*',20)<<endl;
 cout<<lst.iNode->info<<endl;
 cout<<lst.fNode->info<<endl;

@@ -40,15 +40,40 @@ T* listAdd(List<T>& lst, T e) {
 
 template<typename T>
 T* listAddFirst(List<T>& lst,T e)
-{
-   return NULL;
+{           
+      Node<T>* node; 
+   node= addFirst(lst.iNode, e);
+   if(lst.size==0){
+      lst.iNode=node;
+      lst.fNode=node;
+   }else{
+      lst.iNode=node;
+   }
+      lst.size++;
+       return &(node->info);
 }
 
 template<typename T,typename K>
 T listRemove(List<T>& lst,K k,int cmpTK(T,K))
 {
-   T t;
-   return t;
+ T t = remove(lst.iNode, k, cmpTK); 
+
+   
+   if (lst.iNode == NULL) {
+      lst.fNode = NULL; 
+   } else {
+      
+      Node<T>* current = lst.iNode;
+      while (current->sig != NULL) {
+         current = current->sig;
+      }
+      lst.fNode = current; 
+   }
+
+   
+   lst.size--;
+
+   return t; 
 }
 
 template<typename T>
