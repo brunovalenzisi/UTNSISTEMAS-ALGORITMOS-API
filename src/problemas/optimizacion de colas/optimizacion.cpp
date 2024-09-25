@@ -16,9 +16,31 @@
 using namespace std;
 
 
+Caja* seleccionarCaja(Supermercado* s){
+  Map<int,Caja> cajas=s->cajas;
+  Caja* seleccionada=NULL;
+  while(mapHasNext(cajas)){
+   Caja* c=mapNextValue<int,Caja>(cajas);
+   Queue cola=c->cola; 
+   if(queueSize(cola)==0){
+    seleccionada=c;
+   }else if(queueSize(cola)<queueSize(seleccionada->cola)){
+    seleccionada=c;
+   }
+  }
+  return seleccionada;
+}
+
 
 void procesarMovimiento(Mov m,Supermercado* s){
+if(m.mov=='E'){
+Caja* c=seleccionarCaja(s);
 
+}
+else{
+
+
+}
 
 }
 
@@ -47,6 +69,7 @@ while(!feof(f)){
 while(mapHasNext(supermercados)){
 Supermercado* s=mapNextValue<int,Supermercado>(supermercados);
 procesarMovimiento(m,s);
+
 
 }  
 
