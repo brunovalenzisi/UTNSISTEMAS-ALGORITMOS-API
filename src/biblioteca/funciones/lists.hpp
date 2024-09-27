@@ -224,7 +224,8 @@ void free(Node<T>*& p)
 {
    while (p != NULL) {
         Node<T>* temp = p;  
-        p = p->sig;         
+        p = p->sig;  
+        delete temp;       
     }
     p = NULL;
 }

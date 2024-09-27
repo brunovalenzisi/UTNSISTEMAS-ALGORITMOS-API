@@ -37,31 +37,24 @@ if(aux->sig==NULL){
  }
 int main(){
 List<int> lst = list<int>();  
-// agregamos elementos 
-cout<<*listAddFirst<int>(lst,1)<<endl;
-cout<<replicate('*',20)<<endl;
-cout<<lst.iNode->info<<endl;
-cout<<lst.fNode->info<<endl;
-cout<<replicate('*',20)<<endl;
+ listAdd<int>(lst,3);
+ listAdd<int>(lst,2);
+ listAdd<int>(lst,7);
+ listAdd<int>(lst,4);
+ listAdd<int>(lst,1);
 
-cout<<*listAddFirst<int>(lst,2)<<endl; 
-cout<<replicate('*',20)<<endl;
-cout<<lst.iNode->info<<endl;
-cout<<lst.fNode->info<<endl;
-cout<<replicate('*',20)<<endl;
-cout<<*listAddFirst<int>(lst,3)<<endl; 
-cout<<replicate('*',20)<<endl;
-cout<<lst.iNode->info<<endl;
-cout<<lst.fNode->info<<endl;
-cout<<replicate('*',20)<<endl;
 
-listRemove<int>(lst,1,cmpInt);
-cout<<replicate('*',20)<<endl;
-cout<<lst.iNode->info<<endl;
-cout<<lst.fNode->info<<endl;
-cout<<replicate('*',20)<<endl;
 
-cout<<lst.size<<endl;
+cout<<"Sizze: "<< listSize(lst)<<endl;
+
+cout<<*listNext<int>(lst)<<endl;
+
+
+
+
+
+
+
 
 //mostrarLista(q);
 

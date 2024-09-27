@@ -12,7 +12,10 @@ struct List
 {
    Node<T>* iNode=NULL;
    Node<T>* fNode=NULL;
+   Node<T>* cNode=NULL;
+
    int size;
+   
 };
 
 template<typename T>
@@ -20,6 +23,8 @@ List<T> list()
 {
    List<T> lst;
    lst.size=0;
+   lst.cNode=new Node<T>;
+   lst.cNode=NULL;
    return lst;
 }
 
@@ -31,6 +36,7 @@ T* listAdd(List<T>& lst, T e) {
    if(lst.size==0){
       lst.iNode=node;
       lst.fNode=node;
+      lst.cNode=node;
    }else{
       lst.fNode=node;
    }
@@ -46,6 +52,7 @@ T* listAddFirst(List<T>& lst,T e)
    if(lst.size==0){
       lst.iNode=node;
       lst.fNode=node;
+      lst.cNode=node;
    }else{
       lst.iNode=node;
    }
@@ -57,6 +64,11 @@ template<typename T,typename K>
 T listRemove(List<T>& lst,K k,int cmpTK(T,K))
 {
  T t = remove(lst.iNode, k, cmpTK); 
+ if(&t==lst.cNode){
+   if(lst.cNode==lst.fNode){
+      lst.cNode=lst.iNode;
+   }else{lst.cNode=lst.cNode->sig;}
+ }
 
    
    if (lst.iNode == NULL) {
@@ -69,8 +81,6 @@ T listRemove(List<T>& lst,K k,int cmpTK(T,K))
       }
       lst.fNode = current; 
    }
-
-   
    lst.size--;
 
    return t; 
@@ -79,65 +89,103 @@ T listRemove(List<T>& lst,K k,int cmpTK(T,K))
 template<typename T>
 T listRemoveFirst(List<T>& lst)
 {
-   T t;
-   return t;
+   T removed = removeFirst(lst.iNode);
+    if(&removed==lst.cNode){
+   if(lst.cNode==lst.fNode){
+      lst.cNode=lst.iNode;
+   }else{lst.cNode=lst.cNode->sig;}
+ }
+    if(lst.iNode == NULL){
+      lst.fNode=NULL;
+    }
+    lst.size--;
+   return removed;
 }
 
 template<typename T,typename K>
 T* listFind(List<T> lst,K k,int cmpTK(T,K))
 {
-   return NULL;
+   Node<T>* node = find<T,K>(lst.iNode,k,cmpTK);
+ if (node != NULL) {
+        return &(node->info);
+    }
+    return NULL;
 }
 
 template<typename T>
 bool listIsEmpty(List<T> lst)
 {
-   return true;
+   return lst.size==0;
 }
 
 template<typename T>
 int listSize(List<T> lst)
 {
-   return 0;
+   return lst.size;
 }
 
 template<typename T>
 void listFree(List<T>& lst)
 {
+
+free(lst.iNode);
+lst.fNode = NULL;
 }
 
+
+
 template<typename T>
-T* listDiscover(List<T>& lst,T t,int cmpTT)
+T* listDiscover(List<T>& lst,T t,int cmpTT(T,T))
 {
-   return NULL;
+   Node<T>* found=find<T,T>(lst.iNode,t,cmpTT);
+   if(found==NULL){
+      return listAdd<T>(lst,t);
+   }
+   else
+   {
+   return &found->info;
+   }
 }
 
 template<typename T>
 T* listOrderedInsert(List<T>& lst,T t,int cmpTT(T,T))
 {
-   return NULL;
+   Node<T>* nuevoNodo=orderedInsert<T>(lst.iNode,t,cmpTT);
+   return &nuevoNodo->info;
 }
 
 template<typename T>
 void listSort(List<T>& lst,int cmpTT(T,T))
 {
+sort<T>(lst.iNode,cmpTT);
 }
 
 template<typename T>
 void listReset(List<T>& lst)
 {
+   lst.cNode=lst.iNode;
 }
 
 template<typename T>
 bool listHasNext(List<T> lst)
-{
-   return true;
+{  
+   return lst.cNode->sig!=NULL;
 }
 
 template<typename T>
 T* listNext(List<T>& lst)
 {
-   return NULL;
+   T* t=NULL;
+   if(!listIsEmpty<T>(lst)){
+      t=&lst.cNode->info;
+      if(lst.cNode==lst.fNode){
+         lst.cNode=lst.iNode;
+      }else{
+         lst.cNode=lst.cNode->sig;
+      }
+   }
+   
+   return t;
 }
 
 template<typename T>
