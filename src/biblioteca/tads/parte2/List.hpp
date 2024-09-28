@@ -191,7 +191,19 @@ T* listNext(List<T>& lst)
 template<typename T>
 T* listNext(List<T>& lst,bool& endOfList)
 {
-   T* t;
+   T* t=NULL;
+   if(!listIsEmpty<T>(lst)){
+      t=&lst.cNode->info;
+      if(lst.cNode==lst.fNode){
+         lst.cNode=lst.iNode;
+         endOfList=true;
+      }else{
+         lst.cNode=lst.cNode->sig;
+         endOfList=false;
+      }
+   }
+   else{endOfList=true;}
+   
    return t;
 }
 

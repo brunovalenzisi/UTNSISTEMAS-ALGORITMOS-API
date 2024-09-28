@@ -44,10 +44,24 @@ List<int> lst = list<int>();
  listAdd<int>(lst,1);
 
 
-
+bool end=false;
 cout<<"Sizze: "<< listSize(lst)<<endl;
 
-cout<<*listNext<int>(lst)<<endl;
+
+cout<<*listNext<int>(lst,end)<<endl;
+cout<<"Termino: "<<end<<endl;
+cout<<*listNext<int>(lst,end)<<endl;
+cout<<"Termino: "<<end<<endl;
+cout<<*listNext<int>(lst,end)<<endl;
+cout<<"Termino: "<<end<<endl;
+cout<<*listNext<int>(lst,end)<<endl;
+cout<<"Termino: "<<end<<endl;
+cout<<*listNext<int>(lst,end)<<endl;
+cout<<"Termino: "<<end<<endl;
+cout<<*listNext<int>(lst,end)<<endl;
+cout<<"Termino: "<<end<<endl;
+cout<<*listNext<int>(lst,end)<<endl;
+cout<<"Termino: "<<end<<endl;
 
 
 
