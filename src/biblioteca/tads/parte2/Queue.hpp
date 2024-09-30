@@ -9,6 +9,7 @@ using namespace std;
 template<typename T>
 struct Queue
 {
+   List<T> l=list<T>();
 };
 
 template<typename T>
@@ -21,26 +22,26 @@ Queue<T> queue()
 template<typename T>
 T* queueEnqueue(Queue<T>& q,T e)
 {
-   return NULL;
+   return listAdd<T>(q.l,e);
 }
 
 template<typename T>
 T queueDequeue(Queue<T>& q)
 {
-   T t;
+   T t=listRemoveFirst<T>(q.l);
    return t;
 }
 
 template<typename T>
 bool queueIsEmpty(Queue<T> q)
 {
-   return true;
+   return listIsEmpty(q.l);
 }
 
 template<typename T>
 int queueSize(Queue<T> q)
 {
-   return 0;
+   return q.l.size;
 }
 
 #endif

@@ -36,18 +36,21 @@ if(aux->sig==NULL){
 
  }
 int main(){
-List<int> lst = list<int>();  
- listAdd<int>(lst,3);
- listAdd<int>(lst,2);
- listAdd<int>(lst,7);
- listAdd<int>(lst,4);
- listAdd<int>(lst,1);
+Stack<int> s =stack<int>();
+stackPush<int>(s,1);
+stackPush<int>(s,2);
+stackPush<int>(s,3);
+stackPush<int>(s,4);
 
+cout<<"size: "<<stackSize<int>(s)<<endl;
 
+cout<<stackPop<int>(s)<<endl;
+cout<<stackPop<int>(s)<<endl;
+cout<<stackPop<int>(s)<<endl;
+cout<<stackPop<int>(s)<<endl;
+cout<<"esta vacia: "<<stackIsEmpty<int>(s)<<endl;
 
-cout<<"Sizze: "<< listSize(lst)<<endl;
-
-cout<<*listNext<int>(lst)<<endl;
+cout<<"size: "<<stackSize<int>(s)<<endl;
 
 
 
