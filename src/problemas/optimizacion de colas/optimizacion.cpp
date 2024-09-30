@@ -18,15 +18,17 @@ using namespace std;
 
 Caja* seleccionarCaja(Supermercado* s){
   Map<int,Caja> cajas=s->cajas;
-  Caja* seleccionada=NULL;
-  while(mapHasNext(cajas)){
    Caja* c=mapNextValue<int,Caja>(cajas);
-   Queue cola=c->cola; 
+   Caja* seleccionada=c;
+  while(mapHasNext(cajas)){
+   Queue<int> cola=c->cola; 
    if(queueSize(cola)==0){
     seleccionada=c;
+    break;
    }else if(queueSize(cola)<queueSize(seleccionada->cola)){
     seleccionada=c;
    }
+   c=mapNextValue<int,Caja>(cajas);
   }
   return seleccionada;
 }
@@ -66,11 +68,12 @@ mapPut<int,Supermercado>(supermercados,n,nuevoSup);
 FILE* f = fopen("Mov.dat","r+b");
 Mov m=read<Mov>(f);
 while(!feof(f)){
-while(mapHasNext(supermercados)){
 Supermercado* s=mapNextValue<int,Supermercado>(supermercados);
+while(mapHasNext(supermercados)){
 procesarMovimiento(m,s);
 
 
+s=mapNextValue<int,Supermercado>(supermercados);
 }  
 
 

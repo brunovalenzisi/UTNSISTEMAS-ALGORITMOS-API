@@ -51,16 +51,6 @@ cout<<stackPop<int>(s)<<endl;
 cout<<"esta vacia: "<<stackIsEmpty<int>(s)<<endl;
 
 cout<<"size: "<<stackSize<int>(s)<<endl;
-
-
-
-
-
-
-
-
-//mostrarLista(q);
-
 return 0;
 }
 

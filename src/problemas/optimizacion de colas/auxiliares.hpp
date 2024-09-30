@@ -9,6 +9,9 @@
 #include "../../biblioteca/funciones/strings.hpp"
 #include "../../biblioteca/funciones/tokens.hpp"
 #include "../../biblioteca/tads/parte1/Coll.hpp"
+#include "../../biblioteca/tads/parte2/Queue.hpp"
+#include "../../biblioteca/tads/parte2/List.hpp"
+#include "../../biblioteca/tads/parte2/Stack.hpp"
 using namespace std;
 
 struct Mov 
@@ -21,11 +24,11 @@ struct Mov
 
 
 struct Caja{
-Node<int>* cola;
-int longMax;
-int esperaTotal;
-int ocioTot;
-int ultimaSalida;
+Queue<int> cola;
+int longMax=0;
+int esperaTotal=0;
+int ocioTot=0;
+int ultimaSalida=0;
 };
 
 
@@ -33,8 +36,25 @@ struct Supermercado{
 int  cantCajas;
 Map<int,Caja> cajas;
 Map<int,int> clientes;
-int ocioTotal;
-int esperaTotal;
+int ocioTotal=0;
+int esperaTotal=0;
 };
+
+Caja caja(){
+Caja c;
+return c;
+}
+
+
+Supermercado supermercado(int n){
+Supermercado s;
+s.cantCajas=n;
+for(int i=0;i<n;i++){
+Caja c= caja();
+mapPut<int,Caja>(s.cajas,n,c);
+}
+return s;
+}
+
 
 #endif
