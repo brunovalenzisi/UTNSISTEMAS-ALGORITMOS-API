@@ -17,6 +17,17 @@
 #include "principal.hpp"
 using namespace std;
 
+int toMin(const std::string& hhmm) {
+    // Aseguramos que el string tenga 4 dígitos rellenando con ceros si es necesario
+    std::string paddedHhmm = std::string(4 - hhmm.length(), '0') + hhmm;
+
+    // Extraemos las horas y los minutos
+    int hours = std::stoi(paddedHhmm.substr(0, 2));
+    int minutes = std::stoi(paddedHhmm.substr(2, 2));
+
+    // Convertimos todo a minutos
+    return (hours * 60) + minutes;
+}
  int cmpInt(int a , int b){
     return a-b;
  }
@@ -33,24 +44,9 @@ if(aux->sig==NULL){
     cout<<aux->info<<endl;
 }
 
-
  }
 int main(){
-Stack<int> s =stack<int>();
-stackPush<int>(s,1);
-stackPush<int>(s,2);
-stackPush<int>(s,3);
-stackPush<int>(s,4);
 
-cout<<"size: "<<stackSize<int>(s)<<endl;
-
-cout<<stackPop<int>(s)<<endl;
-cout<<stackPop<int>(s)<<endl;
-cout<<stackPop<int>(s)<<endl;
-cout<<stackPop<int>(s)<<endl;
-cout<<"esta vacia: "<<stackIsEmpty<int>(s)<<endl;
-
-cout<<"size: "<<stackSize<int>(s)<<endl;
 return 0;
 }
 

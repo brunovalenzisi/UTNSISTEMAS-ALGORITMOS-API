@@ -18,7 +18,7 @@ struct Mov
 { 
    int idCli; 
    char mov; // 'E' o 'S' 
-   int hora; // hhmm 
+   string hora; // hhmm 
 };
 
 
@@ -29,8 +29,8 @@ Queue<int> cola;
 int longMax=0;
 int esperaTotal=0;
 int ocioTot=0;
-int ultimaSalida=0;
-int ultimaEntrada=0;
+string ultimaSalida="1000";
+string ultimaEntrada="";
 };
 
 

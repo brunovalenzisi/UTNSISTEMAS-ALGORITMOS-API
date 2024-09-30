@@ -15,12 +15,15 @@
 #include "./auxiliares.hpp"
 using namespace std;
 
-int toMin(int data){
-  string s=intToString(data);
-  int min=stringToInt(substring(s,0,2));
-  int h=stringToInt(substring(s,2))*60;
+
+
+int toMin(const std::string& hhmm) {
+    std::string paddedHhmm = std::string(4 - hhmm.length(), '0') + hhmm;
+    int hours = std::stoi(paddedHhmm.substr(0, 2));
+    int minutes = std::stoi(paddedHhmm.substr(2, 2));
+    return (hours * 60) + minutes;
 }
-int calcularTiempo(int salida,int entrada){
+int calcularTiempo(string salida,string entrada){
  return toMin(salida)-toMin(entrada);  
 }
 
@@ -46,6 +49,16 @@ Caja* seleccionarCaja(Supermercado* s){
   return seleccionada;
 }
 
+void mostrarResultados(Map<int,Supermercado> supermercados){
+mapReset<int,Supermercado>(supermercados);
+Supermercado* s=mapNextValue<int,Supermercado>(supermercados);
+while(mapHasNext<int,Supermercado>(supermercados)){
+  cout<<"Supermercado con "<<s->cantCajas<<" cajas"<<endl;
+  cout<<"Ocio total: "<<s->ocioTotal<<endl;
+  cout<<"Espera total: "<<s->esperaTotal<<endl;
+}
+}
+
 
 void procesarMovimiento(Mov m,Supermercado* s){
 if(m.mov=='E'){
@@ -56,11 +69,16 @@ actualizarLongMax(c);
 c->ultimaEntrada=m.hora;
 if(queueSize(c->cola)==0){
   c->ocioTot+=calcularTiempo(m.hora,c->ultimaSalida);
+  s->ocioTotal+=calcularTiempo(m.hora,c->ultimaSalida);
 }
 }
-else{
-
-
+else if(m.mov=='S'){
+int* idCaja=mapGet<int,int>(s->clientes,m.idCli);
+Caja* c= mapGet<int,Caja>(s->cajas,*idCaja);
+queueDequeue<int>(c->cola);
+c->esperaTotal+=calcularTiempo(m.hora,c->ultimaEntrada);
+s->esperaTotal+=calcularTiempo(m.hora,c->ultimaEntrada);
+c->ultimaSalida=m.hora;
 }
 
 }
@@ -90,11 +108,9 @@ while(!feof(f)){
 Supermercado* s=mapNextValue<int,Supermercado>(supermercados);
 while(mapHasNext(supermercados)){
 procesarMovimiento(m,s);
-
-
 s=mapNextValue<int,Supermercado>(supermercados);
 }  
-
+mostrarResultados(supermercados);
 
 
 }
