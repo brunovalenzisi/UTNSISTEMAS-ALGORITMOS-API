@@ -24,11 +24,13 @@ struct Mov
 
 
 struct Caja{
+int idCaja;
 Queue<int> cola;
 int longMax=0;
 int esperaTotal=0;
 int ocioTot=0;
 int ultimaSalida=0;
+int ultimaEntrada=0;
 };
 
 
@@ -40,8 +42,9 @@ int ocioTotal=0;
 int esperaTotal=0;
 };
 
-Caja caja(){
+Caja caja(int id){
 Caja c;
+c.idCaja=id;
 return c;
 }
 
@@ -50,7 +53,7 @@ Supermercado supermercado(int n){
 Supermercado s;
 s.cantCajas=n;
 for(int i=0;i<n;i++){
-Caja c= caja();
+Caja c= caja(i);
 mapPut<int,Caja>(s.cajas,n,c);
 }
 return s;

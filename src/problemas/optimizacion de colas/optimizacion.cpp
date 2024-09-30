@@ -15,7 +15,20 @@
 #include "./auxiliares.hpp"
 using namespace std;
 
+int toMin(int data){
+  string s=intToString(data);
+  int min=stringToInt(substring(s,0,2));
+  int h=stringToInt(substring(s,2))*60;
+}
+int calcularTiempo(int salida,int entrada){
+ return toMin(salida)-toMin(entrada);  
+}
 
+void actualizarLongMax(Caja* c){
+if(queueSize<int>(c->cola)>c->longMax){
+  c->longMax=queueSize<int>(c->cola);
+}
+}
 Caja* seleccionarCaja(Supermercado* s){
   Map<int,Caja> cajas=s->cajas;
    Caja* c=mapNextValue<int,Caja>(cajas);
@@ -37,7 +50,13 @@ Caja* seleccionarCaja(Supermercado* s){
 void procesarMovimiento(Mov m,Supermercado* s){
 if(m.mov=='E'){
 Caja* c=seleccionarCaja(s);
-
+queueEnqueue(c->cola,m.idCli);
+mapPut<int,int>(s->clientes,m.idCli,c->idCaja);
+actualizarLongMax(c);
+c->ultimaEntrada=m.hora;
+if(queueSize(c->cola)==0){
+  c->ocioTot+=calcularTiempo(m.hora,c->ultimaSalida);
+}
 }
 else{
 
