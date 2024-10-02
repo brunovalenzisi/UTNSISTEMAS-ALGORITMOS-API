@@ -18,7 +18,7 @@ struct Mov
 { 
    int idCli; 
    char mov; // 'E' o 'S' 
-   string hora; // hhmm 
+   char hora[4]; // hhmm 
 };
 
 
@@ -29,8 +29,8 @@ Queue<int> cola;
 int longMax=0;
 int esperaTotal=0;
 int ocioTot=0;
-string ultimaSalida="1000";
-string ultimaEntrada="";
+char ultimaSalida[4];
+char ultimaEntrada[4];
 };
 
 
@@ -42,9 +42,11 @@ int ocioTotal=0;
 int esperaTotal=0;
 };
 
-Caja caja(int id){
+Caja caja(int id,char apertura[4]){
 Caja c;
 c.idCaja=id;
+strcpy(c.ultimaSalida,apertura);
+strcpy(c.ultimaEntrada,"");
 return c;
 }
 
@@ -53,7 +55,7 @@ Supermercado supermercado(int n){
 Supermercado s;
 s.cantCajas=n;
 for(int i=0;i<n;i++){
-Caja c= caja(i);
+Caja c= caja(i,"1000");
 mapPut<int,Caja>(s.cajas,n,c);
 }
 return s;

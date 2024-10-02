@@ -17,13 +17,12 @@ using namespace std;
 
 
 
-int toMin(const std::string& hhmm) {
-    std::string paddedHhmm = std::string(4 - hhmm.length(), '0') + hhmm;
-    int hours = std::stoi(paddedHhmm.substr(0, 2));
-    int minutes = std::stoi(paddedHhmm.substr(2, 2));
+int toMin(const char hhmm[4]) {
+    int hours = (hhmm[0] - '0') * 10 + (hhmm[1] - '0');
+    int minutes = (hhmm[2] - '0') * 10 + (hhmm[3] - '0');
     return (hours * 60) + minutes;
 }
-int calcularTiempo(string salida,string entrada){
+int calcularTiempo(char salida[4],char entrada[4]){
  return toMin(salida)-toMin(entrada);  
 }
 
@@ -66,7 +65,7 @@ Caja* c=seleccionarCaja(s);
 queueEnqueue(c->cola,m.idCli);
 mapPut<int,int>(s->clientes,m.idCli,c->idCaja);
 actualizarLongMax(c);
-c->ultimaEntrada=m.hora;
+strcpy(c->ultimaEntrada,m.hora);
 if(queueSize(c->cola)==0){
   c->ocioTot+=calcularTiempo(m.hora,c->ultimaSalida);
   s->ocioTotal+=calcularTiempo(m.hora,c->ultimaSalida);
@@ -78,7 +77,7 @@ Caja* c= mapGet<int,Caja>(s->cajas,*idCaja);
 queueDequeue<int>(c->cola);
 c->esperaTotal+=calcularTiempo(m.hora,c->ultimaEntrada);
 s->esperaTotal+=calcularTiempo(m.hora,c->ultimaEntrada);
-c->ultimaSalida=m.hora;
+strcpy(c->ultimaSalida,m.hora);
 }
 
 }
@@ -102,8 +101,10 @@ Supermercado nuevoSup=supermercado(n);
 mapPut<int,Supermercado>(supermercados,n,nuevoSup);
 }
 
-FILE* f = fopen("Mov.dat","r+b");
+FILE* f = fopen("MOVIMIENTOS.dat","r+b");
+cout<<"hola"<<endl;
 Mov m=read<Mov>(f);
+cout<<m.mov<<endl;
 while(!feof(f)){
 Supermercado* s=mapNextValue<int,Supermercado>(supermercados);
 while(mapHasNext(supermercados)){
