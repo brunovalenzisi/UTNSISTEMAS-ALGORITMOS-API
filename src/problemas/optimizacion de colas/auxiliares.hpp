@@ -35,9 +35,10 @@ char ultimaEntrada[4];
 
 
 struct Supermercado{
+int idSupermercado;
 int  cantCajas;
-Map<int,Caja> cajas;
-Map<int,int> clientes;
+Map<int,Caja> cajas=map<int,Caja>();
+Map<int,int> clientes=map<int,int>();
 int ocioTotal=0;
 int esperaTotal=0;
 };
@@ -51,8 +52,9 @@ return c;
 }
 
 
-Supermercado supermercado(int n){
+Supermercado supermercado(int id,int n ){
 Supermercado s;
+s.idSupermercado=id;
 s.cantCajas=n;
 for(int i=0;i<n;i++){
 Caja c= caja(i,"1000");

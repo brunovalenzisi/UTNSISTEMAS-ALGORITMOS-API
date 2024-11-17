@@ -55,6 +55,8 @@ while(mapHasNext<int,Supermercado>(supermercados)){
   cout<<"Supermercado con "<<s->cantCajas<<" cajas"<<endl;
   cout<<"Ocio total: "<<s->ocioTotal<<endl;
   cout<<"Espera total: "<<s->esperaTotal<<endl;
+  s=mapNextValue<int,Supermercado>(supermercados);
+
 }
 }
 
@@ -82,13 +84,11 @@ strcpy(c->ultimaSalida,m.hora);
 
 }
 
-    
-
 
 int main(){
-Map<int,Supermercado> supermercados;
+Map<int,Supermercado> supermercados=map<int,Supermercado>();
 
-Array<int> cantidadCajas;
+Array<int> cantidadCajas = array<int>();
 arrayAdd<int>(cantidadCajas,3);
 arrayAdd<int>(cantidadCajas,4);
 arrayAdd<int>(cantidadCajas,7);
@@ -97,24 +97,25 @@ arrayAdd<int>(cantidadCajas,10);
 
 for (int i=0; i<arraySize<int>(cantidadCajas);i++){
 int n =*arrayGet<int>(cantidadCajas,i);
-Supermercado nuevoSup=supermercado(n);
+Supermercado nuevoSup=supermercado(i,n);
 mapPut<int,Supermercado>(supermercados,n,nuevoSup);
+cout<<nuevoSup.idSupermercado<<endl;
 }
 
 FILE* f = fopen("MOVIMIENTOS.dat","r+b");
-cout<<"hola"<<endl;
 Mov m=read<Mov>(f);
-cout<<m.mov<<endl;
 while(!feof(f)){
+mapReset<int,Supermercado>(supermercados);
 Supermercado* s=mapNextValue<int,Supermercado>(supermercados);
 while(mapHasNext(supermercados)){
 procesarMovimiento(m,s);
 s=mapNextValue<int,Supermercado>(supermercados);
-}  
-mostrarResultados(supermercados);
-
-
 }
+cout<<m.hora<<endl;
+m=read<Mov>(f);
+}
+cout<<"termino"<<endl;
+//mostrarResultados(supermercados);
 
 return 0;
 

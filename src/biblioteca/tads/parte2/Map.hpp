@@ -27,35 +27,36 @@ Map<K, V> map() {
 
 
 template<typename K, typename V>
-V* mapGet(Map<K,V> m, K k) {
-    V* v = NULL;
+V* mapGet(Map<K, V>& m, K k) {
+    // Busca la clave en el mapa
     for (int i = 0; i < m.len; i++) {
         if (*arrayGet(m.keys, i) == k) {
-            v = arrayGet(m.values, i);
-            break;
+            return arrayGet(m.values, i);  // Devuelve el valor asociado a la clave
         }
     }
-    return v;
+    return nullptr; // Si no se encuentra la clave, devuelve nullptr
 }
+
 
 
 template<typename K, typename V>
 V* mapPut(Map<K, V>& m, K k, V v) {
-      
+    // Busca si la clave ya existe
     for (int i = 0; i < m.len; i++) {
         if (*arrayGet(m.keys, i) == k) {
-            *arrayGet(m.values, i) = v; 
-            return arrayGet(m.values, i);
+            *arrayGet(m.values, i) = v;  // Actualiza el valor
+            return arrayGet(m.values, i); // Retorna el valor actualizado
         }
     }
 
+    // Si la clave no existe, agrega un nuevo par clave-valor
     arrayAdd<K>(m.keys, k);
     arrayAdd<V>(m.values, v);
-    
-    m.len++;  
-    m.size = m.keys.size;
 
-    return arrayGet(m.values, m.len - 1); 
+    m.len++;  
+    m.size = m.keys.size;  // Actualiza el tamaño
+
+    return arrayGet(m.values, m.len - 1); // Retorna el nuevo valor agregado
 }
 
 template<typename K,typename V>

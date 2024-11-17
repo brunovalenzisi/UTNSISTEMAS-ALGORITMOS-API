@@ -50,6 +50,11 @@ char actividad;//carga(C) / Descarga(D)
 char status;//Arribo (A)/ partida(P)
 };
 
+bool estable(int peso,int longitud,int cteFlotacion){}; //peso de container, long de container, coef de flot barco
+
+
+char actividad(Fecha f){};
+
 
 
 
