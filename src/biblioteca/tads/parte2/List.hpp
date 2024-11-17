@@ -134,17 +134,24 @@ lst.fNode = NULL;
 
 
 template<typename T>
-T* listDiscover(List<T>& lst,T t,int cmpTT(T,T))
+T* listDiscover(List<T>& lst, T t, int cmpTT(T, T))
 {
-   Node<T>* found=find<T,T>(lst.iNode,t,cmpTT);
-   if(found==NULL){
-      return listAdd<T>(lst,t);
-   }
-   else
-   {
-   return &found->info;
-   }
+    if (listIsEmpty(lst)) {
+        return listAdd(lst, t);
+    }
+
+    Node<T>* currentNode = lst.iNode;
+
+    while (currentNode != NULL) {
+        if (cmpTT(currentNode->info, t) == 0) {
+            return &(currentNode->info);
+        }
+        currentNode = currentNode->sig;  
+    }
+
+    return listAdd(lst, t);
 }
+
 
 template<typename T>
 T* listOrderedInsert(List<T>& lst,T t,int cmpTT(T,T))
